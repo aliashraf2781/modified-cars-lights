@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0f0f0f;
+  --color-background: #0f0f0f;
+  --color-secondary: #1a1a1a;
+  --color-accent: #ff5722;
+  --color-text: #e0e0e0;
+}
+
+
+body{ 
+  scroll-behavior: smooth;
+
+  background-color: var(--color-background);
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-in-out;
+}
