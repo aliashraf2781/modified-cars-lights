@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabaseClient";
 import type { Brand } from "../types/categories.";
+import { useTranslation } from "react-i18next";
 
-export function useCategories(lang = "en") {
+export function useCategories() {
+     const { i18n } = useTranslation();
+     const lang = i18n.language;
     const [categories, setCategories] = useState<Brand[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);

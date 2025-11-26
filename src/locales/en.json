@@ -1,0 +1,18 @@
+{
+  "categories": {
+    "title": "Categories",
+    "create": "Create Category",
+    "update": "Update Category",
+    "delete": "Delete Category"
+  },
+  "subCategories": {
+    "title": "Sub Categories",
+    "create": "Create Sub Category"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "name": "Name",
+    "logo": "Logo"
+  }
+}

@@ -4,9 +4,12 @@ import NavLinks from "./NavLinks";
 import { IoIosMenu } from "react-icons/io";
 import { useState } from "react";
 import MobileDrawer from "./MobileDrawer";
-import LanguageSwitcher from "../../common/LanguageSwitcher/LanguageSwitcher";
+import { useTranslation } from "react-i18next";
+import { useLocation, useNavigate } from "react-router";
 
-export default function Navbar({ lang }: { lang: string }) {
+export default function Navbar() {
+    const { i18n } = useTranslation();
+    const lang = i18n.language;
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const navLinks = [
@@ -14,7 +17,16 @@ export default function Navbar({ lang }: { lang: string }) {
     { name: lang === "ar" ? "من نحن" : "About", href: `/${lang}/about` },
     { name: lang === "ar" ? "اتصل بنا" : "Contact", href: `/${lang}/contact` },
   ];
-
+   const navigate = useNavigate();
+   const location = useLocation();
+    const toggleLanguage = () => {
+      const newLang = i18n.language === "en" ? "ar" : "en";
+      const newPath = location.pathname.replace(
+        `/${i18n.language}`,
+        `/${newLang}`
+      );
+      navigate(newPath);
+    };
   return (
     <>
       <nav className="fixed z-50 w-full backdrop-blur-md shadow-lg  ">
@@ -22,11 +34,7 @@ export default function Navbar({ lang }: { lang: string }) {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <div className="relative h-[50px] w-[120px] transition-transform hover:scale-105">
-              <img
-                src="/logo.png"
-                alt="Logo"
-                className="object-contain"
-              />
+              <img src="/logo.png" alt="Logo" className="object-contain" />
             </div>
 
             {/* Desktop Links */}
@@ -34,7 +42,12 @@ export default function Navbar({ lang }: { lang: string }) {
 
             {/* language switcher */}
             <div className="hidden md:block">
-              <LanguageSwitcher />
+              <button
+                onClick={toggleLanguage}
+                className="px-4 py-2 bg-blue-500 text-white rounded"
+              >
+                {i18n.language }
+              </button>{" "}
             </div>
 
             {/* Mobile Menu Icon */}

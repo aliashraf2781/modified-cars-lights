@@ -3,7 +3,7 @@ import { useCategories } from "../../../../../core/hooks/useCategories";
 import SectionHeader from "../../../common/SectionHeader/SectionHeader";
 
 export default function ShoppingSection({ lang }: { lang: string }) {
-  const { categories } = useCategories(lang);
+  const { categories } = useCategories();
 
   return (
     <section className="cars-types container mx-auto flex flex-col items-center gap-8">
