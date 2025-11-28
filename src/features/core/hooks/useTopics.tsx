@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabaseClient";
+import { useTranslation } from "react-i18next";
 
 // -------------------------
 // Types
@@ -30,14 +31,15 @@ interface UpdateTopic extends CreateTopic {
 // Hook
 // -------------------------
 export function useTopics({
-    lang = "ar",
     carCategory = null,
     lightsCategory = null,
 }: {
-    lang?: "ar" | "en";
     carCategory?: string | null;
     lightsCategory?: string | null;
 }) {
+    const  { i18n } = useTranslation();
+    const lang = i18n.language;
+
     const [topics, setTopics] = useState<Topic[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
@@ -69,7 +71,6 @@ export function useTopics({
             .select(selectQuery)
             .match(filters)
             .order("id", { ascending: true });
-
         if (error) setError(error.message);
         else setTopics(data);
 

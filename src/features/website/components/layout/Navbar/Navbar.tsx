@@ -12,11 +12,11 @@ export default function Navbar() {
     const lang = i18n.language;
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  const navLinks = [
-    { name: lang === "ar" ? "الرئيسية" : "Home", href: `/${lang}` },
-    { name: lang === "ar" ? "من نحن" : "About", href: `/${lang}/about` },
-    { name: lang === "ar" ? "اتصل بنا" : "Contact", href: `/${lang}/contact` },
-  ];
+ const navLinks = [
+   { name: lang === "ar" ? "الرئيسية" : "Home", href: `/${lang}`, exact: true },
+   { name: lang === "ar" ? "من نحن" : "About", href: `/${lang}/about` },
+   { name: lang === "ar" ? "اتصل بنا" : "Contact", href: `/${lang}/contact` },
+ ];
    const navigate = useNavigate();
    const location = useLocation();
     const toggleLanguage = () => {
