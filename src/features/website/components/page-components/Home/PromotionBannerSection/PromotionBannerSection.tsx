@@ -1,5 +1,8 @@
+import { useTranslation } from "react-i18next";
 
 export default function PromotionBannerSection() {
+  const { i18n } = useTranslation();
+  const lang = i18n.language;
   return (
     <div className="w-full relative h-48 md:h-64 px-2 md:px-0 lg:h-80 bg-secondary rounded-lg flex items-center justify-center">
       <img
@@ -9,7 +12,9 @@ export default function PromotionBannerSection() {
       />
       <div className="absolute inset-0 bg-linear-to-t from-primary/15" />
       <h2 className="absolute z-50 text-xl md:text-4xl text-text font-bold text-center">
-        Upgrade Your Ride with Our Exclusive Car Light Mods !
+        {lang === "ar"
+          ? "طوّر شكل عربيتك مع تعديلات الإضاءة الحصرية!"
+          : "Upgrade Your Ride with Our Exclusive Car Light Mods !"}
       </h2>
     </div>
   );
