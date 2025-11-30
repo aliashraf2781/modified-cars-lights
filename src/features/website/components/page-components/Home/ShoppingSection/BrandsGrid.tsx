@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import BrandList from "./BrandList";
+import { useTranslation } from "react-i18next";
 // import BrandModels from "./BrandModels";
 
 type Brand = {
@@ -13,7 +14,9 @@ type Props = {
   lang: string;
 };
 
-export default function BrandsGrid({ brands, lang }: Props) {
+export default function BrandsGrid({ brands }: Props) {
+  const {i18n}=useTranslation();
+  const lang=i18n.language;
   const [showAll, setShowAll] = useState(false);
   const [selectedBrand, setSelectedBrand] = useState<Brand | null>(null);
 

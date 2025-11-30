@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabaseClient";
 import type { subCategory } from "../types/subCategories";
+import { useTranslation } from "react-i18next";
 
-export function useSubCategories(categoryId: string, lang = "ar" as string) {
+export function useSubCategories(categoryId: string) {
+     const { i18n } = useTranslation();
+     const lang = i18n.language;
     const [subCategories, setSubCategories] = useState<subCategory[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
