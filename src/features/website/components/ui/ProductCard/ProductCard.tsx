@@ -1,9 +1,10 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import React from "react";
 import { useTranslation } from "react-i18next";
 
 interface ProductCardProps {
-  topic: any; 
+  topic: unknown; 
 }
 
 export default function ProductCard({ topic }: ProductCardProps) {

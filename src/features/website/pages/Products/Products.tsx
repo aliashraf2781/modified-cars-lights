@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useParams } from "react-router";
 import SectionHeader from "../../components/common/SectionHeader/SectionHeader";
 import { useTopics } from "../../../core/hooks/useTopics";

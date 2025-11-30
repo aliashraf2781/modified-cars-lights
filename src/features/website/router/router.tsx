@@ -2,9 +2,11 @@ import { lazy, Suspense } from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import App from "../../../App";
 import WebsiteLayout from "../components/layout/WebsiteLayout";
+import AboutPage from "../pages/About/About";
+import ContactPage from "../pages/Contact/ContactPage";
 
 // Lazy Loading Pages
-const Home = lazy(() => import("../pages/Home/Home"));
+import Home from "../pages/Home/Home";
 const Products = lazy(() => import("../pages/Products/Products"));
 
 const router = createBrowserRouter([
@@ -14,36 +16,22 @@ const router = createBrowserRouter([
   },
   {
     path: "/:lang",
-    element: (
-      <Suspense fallback={<div className="text-center">Loading...</div>}>
-        <App />
-      </Suspense>
-    ),
+    element: <App />,
     children: [
       {
-        element: (
-          <Suspense fallback={<div className="text-center">Loading...</div>}>
-            <WebsiteLayout />
-          </Suspense>
-        ),
+        element: <WebsiteLayout />,
         children: [
           {
             index: true,
-            element: (
-              <Suspense
-                fallback={<div className="text-center">Loading...</div>}
-              >
-                <Home />
-              </Suspense>
-            ),
+            element: <Home />,
           },
           {
             path: "about",
-            element: <div>about</div>,
+            element: <AboutPage />,
           },
           {
             path: "contact",
-            element: <div>contact</div>,
+            element: <ContactPage />,
           },
           {
             path: "products/:categoryId",

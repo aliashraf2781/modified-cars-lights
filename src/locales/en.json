@@ -14,5 +14,59 @@
     "error": "Error",
     "name": "Name",
     "logo": "Logo"
+  },
+  "about": {
+    "header": {
+      "title": "About Us",
+      "subtitle": "Making a difference through creativity and excellence"
+    },
+    "story": {
+      "title": "Our Story",
+      "text1": "We are a team of creators and innovators who believe in the power of technology to change the world. Since our inception, our sole goal has been to provide outstanding digital solutions that help our clients succeed and excel in their fields.",
+      "text2": "We combine extensive experience with a passion for innovation to deliver services that exceed expectations. Every project for us is a new opportunity to prove our commitment to excellence and quality."
+    },
+    "features": {
+      "title": "Why Choose Us",
+      "items": {
+        "speed": {
+          "title": "High Speed",
+          "desc": "We provide exceptional performance and superior loading speeds"
+        },
+        "innovation": {
+          "title": "Innovative Ideas",
+          "desc": "Creative solutions that meet modern needs"
+        },
+        "team": {
+          "title": "Professional Team",
+          "desc": "Experts specializing in all fields"
+        },
+        "support": {
+          "title": "Continuous Support",
+          "desc": "We are with you around the clock"
+        }
+      }
+    },
+    "stats": {
+      "title": "Our Numbers Speak",
+      "items": {
+        "clients": "Satisfied Client",
+        "projects": "Completed Project",
+        "awards": "Award",
+        "support": "Technical Support"
+      }
+    },
+    "values": {
+      "title": "Our Values",
+      "items": [
+        "Commitment to Quality and Excellence",
+        "Continuous Innovation and Development",
+        "Transparency and Credibility",
+        "Customer Satisfaction is Top Priority"
+      ]
+    },
+    "footer": {
+      "text": "Together We Build the Future",
+      "copyright": "All rights reserved © 2024"
+    }
   }
 }
