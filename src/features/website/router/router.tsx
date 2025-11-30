@@ -1,8 +1,11 @@
+import { lazy, Suspense } from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import App from "../../../App";
-import  WebsiteLayout  from "../components/layout/WebsiteLayout";
-import Home from "../pages/Home";
+import WebsiteLayout from "../components/layout/WebsiteLayout";
 
+// Lazy Loading Pages
+const Home = lazy(() => import("../pages/Home/Home"));
+const Products = lazy(() => import("../pages/Products/Products"));
 
 const router = createBrowserRouter([
   {
@@ -11,22 +14,46 @@ const router = createBrowserRouter([
   },
   {
     path: "/:lang",
-    element: <App />,
+    element: (
+      <Suspense fallback={<div className="text-center">Loading...</div>}>
+        <App />
+      </Suspense>
+    ),
     children: [
       {
-        element: <WebsiteLayout />,
+        element: (
+          <Suspense fallback={<div className="text-center">Loading...</div>}>
+            <WebsiteLayout />
+          </Suspense>
+        ),
         children: [
           {
             index: true,
-            element: <Home />,
+            element: (
+              <Suspense
+                fallback={<div className="text-center">Loading...</div>}
+              >
+                <Home />
+              </Suspense>
+            ),
           },
           {
             path: "about",
-            element: <div>abit</div>,
+            element: <div>about</div>,
           },
           {
             path: "contact",
             element: <div>contact</div>,
+          },
+          {
+            path: "products/:categoryId",
+            element: (
+              <Suspense
+                fallback={<div className="text-center">Loading...</div>}
+              >
+                <Products />
+              </Suspense>
+            ),
           },
         ],
       },

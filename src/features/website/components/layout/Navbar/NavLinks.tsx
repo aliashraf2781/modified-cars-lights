@@ -1,36 +1,26 @@
 import { NavLink } from "react-router-dom";
 
-interface NavLinkItem {
-  name: string;
-  href: string;
+interface NavLinksProps {
+  navLinks: Array<{ name: string; href: string; exact?: boolean }>;
 }
 
-export default function NavLinks({ navLinks }: { navLinks: NavLinkItem[] }) {
+export default function NavLinks({ navLinks }: NavLinksProps) {
   return (
-    <ul className="hidden md:flex items-center gap-8">
+    <div className="hidden md:flex items-center gap-8">
       {navLinks.map((link) => (
-        <li key={link.name}>
-          <NavLink
-            to={link.href}
-            className={({ isActive }) =>
-              `relative font-medium text-sm tracking-wide transition-all duration-300 group ${
-                isActive ? "text-text" : "text-text/70 hover:text-text"
-              }`
-            }
-          >
-            {({ isActive }) => (
-              <>
-                {link.name}
-                <span
-                  className={`absolute -bottom-1 left-0 h-0.5 bg-white/70 transition-all duration-300 ${
-                    isActive ? "w-full" : "w-0 group-hover:w-full"
-                  }`}
-                ></span>
-              </>
-            )}
-          </NavLink>
-        </li>
+        <NavLink
+          key={link.href}
+          to={link.href}
+          end={link.exact} // هنا المفتاح
+          className={({ isActive }) =>
+            `text-md font-medium transition-all hover:scale-105 ${
+              isActive ? "scale-120 text-white border-b-2 border-white" : "text-text/70"
+            }`
+          }
+        >
+          {link.name}
+        </NavLink>
       ))}
-    </ul>
+    </div>
   );
 }

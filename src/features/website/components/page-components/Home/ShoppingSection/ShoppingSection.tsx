@@ -8,9 +8,12 @@ export default function ShoppingSection({ lang }: { lang: string }) {
   return (
     <section className="cars-types container mx-auto flex flex-col items-center gap-8">
       <SectionHeader
-        title="Shop by"
-        highlight="Brand"
-        description="Premium lighting solutions for all major car manufacturers"
+        titleAr="تسوق من أفضل"
+        titleEn="Shop from the Best"
+        highlightAr="الماركات"
+        highlightEN="Brands"
+        descriptionAr="اكتشف مجموعة واسعة من السيارات من أفضل الماركات العالمية."
+        descriptionEn="Explore a wide range of cars from the best global brands."
       />
       <BrandsGrid brands={categories} lang={lang} />
     </section>
