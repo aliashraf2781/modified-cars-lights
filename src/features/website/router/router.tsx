@@ -7,6 +7,11 @@ import ContactPage from "../pages/Contact/ContactPage";
 
 // Lazy Loading Pages
 import Home from "../pages/Home/Home";
+import Login from "../../dashboard/pages/Login";
+import ProtectedRoute from "../../auth/components/ProtectedRoute";
+import DashboardLayout from "../../dashboard/layout/DashboardLayout";
+import Dashboard from "../../dashboard/pages/Dashboard";
+
 const Products = lazy(() => import("../pages/Products/Products"));
 
 const router = createBrowserRouter([
@@ -42,6 +47,25 @@ const router = createBrowserRouter([
                 <Products />
               </Suspense>
             ),
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    element: <ProtectedRoute />,
+    children: [
+      {
+        path: "/dashboard",
+        element: <DashboardLayout />,
+        children: [
+          {
+            index: true,
+            element: <Dashboard />,
           },
         ],
       },
