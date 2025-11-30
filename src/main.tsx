@@ -4,9 +4,12 @@ import { RouterProvider } from "react-router-dom";
 import "./index.css";
 import "./i18n"; // تأكد من الاستيراد
 import router from "./features/website/router/router";
+import { AuthProvider } from "./features/auth/context/AuthProvider";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>
 );
