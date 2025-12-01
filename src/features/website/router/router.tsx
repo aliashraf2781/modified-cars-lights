@@ -11,6 +11,8 @@ import Login from "../../dashboard/pages/Login";
 import ProtectedRoute from "../../auth/components/ProtectedRoute";
 import DashboardLayout from "../../dashboard/layout/DashboardLayout";
 import Dashboard from "../../dashboard/pages/Dashboard";
+import CategoriesManagement from "../../dashboard/pages/CategoriesManagement";
+import TopicsManagement from "../../dashboard/pages/TopicsManagement";
 
 const Products = lazy(() => import("../pages/Products/Products"));
 
@@ -66,6 +68,14 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <Dashboard />,
+          },
+          {
+            path: "categories",
+            element: <CategoriesManagement />,
+          },
+          {
+            path: "topics",
+            element: <TopicsManagement />,
           },
         ],
       },

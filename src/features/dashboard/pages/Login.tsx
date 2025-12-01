@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../core/lib/supabaseClient";
 import type { LoginFormData } from "../types/dashboard";
-import { useAuth } from "../../auth/context/useAuth";
+import { useAuth } from "../../auth/hooks/useAuth";
 
 export default function Login() {
     const navigate = useNavigate();
