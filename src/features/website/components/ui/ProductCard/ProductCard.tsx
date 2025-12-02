@@ -11,8 +11,24 @@ export default function ProductCard({ topic }: ProductCardProps) {
   const { i18n } = useTranslation();
   const lang = i18n.language;
 
+  const phoneNumber = "201001744902";
+
+  const message =
+    lang === "ar"
+      ? `مرحبا، أريد الاستفسار عن المنتج: ${topic.name} لنوع السيارة: ${topic.car_category?.name}`
+      : `Hello, I want to inquire about the product: ${topic.name} for car type: ${topic.car_category?.name}`;
+
+  const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+    message
+  )}`;
+
   return (
-    <div className="border flex flex-col p-4 bg-secondary rounded-lg shadow hover:shadow-lg transition-shadow">
+    <a
+      href={whatsappLink}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="border flex flex-col p-4 bg-secondary rounded-lg shadow hover:shadow-lg transition-shadow"
+    >
       {topic.video && (
         <iframe
           src={`https://www.youtube.com/embed/${topic.video}`}
@@ -38,6 +54,6 @@ export default function ProductCard({ topic }: ProductCardProps) {
           {topic.lights_category?.name}
         </p>
       </div>
-    </div>
+    </a>
   );
 }
