@@ -13,7 +13,36 @@
     "loading": "Loading...",
     "error": "Error",
     "name": "Name",
-    "logo": "Logo"
+    "logo": "Logo",
+    "scrollDown": "Scroll Down",
+    "viewAllProducts": "View All Products",
+    "whatsappMessage": "Hi! I'm interested in your modified car lights project."
+  },
+  "footer": {
+    "description": "Upgrade your ride with premium lighting — performance and style in every beam.",
+    "address": "123 Auto Street, City",
+    "links": {
+      "products": "Products",
+      "company": "Company",
+      "support": "Support",
+      "headlights": "Headlights",
+      "tailLights": "Tail Lights",
+      "aboutUs": "About Us",
+      "ourStory": "Our Story",
+      "contact": "Contact",
+      "faqs": "FAQs"
+    },
+    "cta": {
+      "title": "Ready to Upgrade Your Car's Lighting?",
+      "description": "Get in touch with our team to discuss your specific needs and preferences. We're here to help you create the perfect lighting solution for your vehicle.",
+      "button": "Get Contact with Us"
+    },
+    "copyright": "© {{year}} Modified Car Lights. All rights reserved."
+  },
+  "navbar": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact"
   },
   "about": {
     "header": {
@@ -67,6 +96,34 @@
     "footer": {
       "text": "Together We Build the Future",
       "copyright": "All rights reserved © 2024"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "First website in Egypt specialized in car lighting modifications ( front and rear lights, headlights, and interior and exterior car lighting and others )",
+    "whatsapp": "Contact us for any questions via whatsapp",
+    "youtube": "Follow us for all new updates via our youtube channel",
+    "tiktok": "Follow us on tiktok"
+  },
+  "products": {
+    "title": "Our ",
+    "highlight": "Products",
+    "description": "Discover our wide range of products designed to meet your needs.",
+    "carType": "Car Type:",
+    "lightingType": "Lighting Type:"
+  },
+  "home": {
+    "promotionBanner": "Upgrade Your Ride with Our Exclusive Car Light Mods !",
+    "shopping": {
+      "title": "Shop from the Best",
+      "highlight": "Brands",
+      "description": "Explore a wide range of cars from the best global brands.",
+      "showAll": "Show All",
+      "showLess": "Show Less"
+    },
+    "branding": {
+      "title": "Mod Your Ride – Unleash Your Car’s True Potential!",
+      "description": "We specialize in professional car light modification and upgrades. From standard headlights to powerful LED and Xenon setups, we enhance brightness, visibility, and overall vehicle style. Our mission is to boost night driving safety while giving your car a modern, standout look. Whether you want a sporty vibe or a premium lighting upgrade, we provide high-quality results with original materials."
     }
   }
 }

@@ -4,7 +4,6 @@ import PromotionBannerSection from "../../components/page-components/Home/Promot
 import ShoppingSection from "../../components/page-components/Home/ShoppingSection/ShoppingSection";
 
 export default function Home() {
-  const lang = "ar";
   return (
     <div className="flex flex-col gap-8 md:gap-15">
       {/* Hero Section */}
@@ -14,7 +13,7 @@ export default function Home() {
       {/* Promotion */}
       <PromotionBannerSection />
       {/* Cars Types */}
-      <ShoppingSection lang={lang} />
+      <ShoppingSection />
     </div>
   );
 }

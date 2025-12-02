@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import BrandList from "./BrandList";
 import BrandModels from "./BrandModels";
+import { useTranslation } from "react-i18next";
 
 type Brand = {
   id: string;
@@ -10,10 +11,10 @@ type Brand = {
 
 type Props = {
   brands: Brand[];
-  lang: string;
 };
 
 export default function BrandsGrid({ brands }: Props) {
+  const { t } = useTranslation();
   const [showAll, setShowAll] = useState(false);
   const [selectedBrand, setSelectedBrand] = useState<Brand | null>(null);
 
@@ -42,12 +43,12 @@ export default function BrandsGrid({ brands }: Props) {
         onClick={() => setShowAll((prev) => !prev)}
         className="px-6 py-2 rounded-full bg-red-600 text-white hover:bg-red-700 transition-all duration-300 shadow-sm hover:shadow-md"
       >
-        {showAll ? "Show Less" : "Show All"}
+        {showAll ? t("home.shopping.showLess") : t("home.shopping.showAll")}
       </button>
 
       {/* Scroll target */}
       <div className="w-full">
-        {selectedBrand && <BrandModels  brand={selectedBrand}  />}
+        {selectedBrand && <BrandModels brand={selectedBrand} />}
       </div>
     </div>
   );
