@@ -1,21 +1,23 @@
 import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 import { MdEmail, MdPhone, MdLocationOn } from "react-icons/md";
+import { useTranslation } from "react-i18next";
 
 export default function Footer() {
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
   const footerLinks = {
     products: [
-      { name: "Headlights", href: "/products/headlights" },
-      { name: "Tail Lights", href: "/products/tail-lights" },
+      { name: t("footer.links.headlights"), href: "/products/headlights" },
+      { name: t("footer.links.tailLights"), href: "/products/tail-lights" },
     ],
     company: [
-      { name: "About Us", href: "/about" },
-      { name: "Our Story", href: "/story" },
+      { name: t("footer.links.aboutUs"), href: "/about" },
+      { name: t("footer.links.ourStory"), href: "/story" },
     ],
     support: [
-      { name: "Contact", href: "/contact" },
-      { name: "FAQs", href: "/faqs" },
+      { name: t("footer.links.contact"), href: "/contact" },
+      { name: t("footer.links.faqs"), href: "/faqs" },
     ],
   };
 
@@ -38,8 +40,7 @@ export default function Footer() {
             </a>
 
             <p className="text-sm text-gray-400 mb-6">
-              Upgrade your ride with premium lighting — performance and style in
-              every beam.
+              {t("footer.description")}
             </p>
 
             <div className="space-y-2 text-sm">
@@ -50,7 +51,7 @@ export default function Footer() {
                 <MdEmail className="text-red-600" /> info@modifiedcarlights.com
               </div>
               <div className="flex items-center gap-2">
-                <MdLocationOn className="text-red-600" /> 123 Auto Street, City
+                <MdLocationOn className="text-red-600" /> {t("footer.address")}
               </div>
             </div>
           </div>
@@ -59,7 +60,7 @@ export default function Footer() {
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
               <h3 className="text-lg font-semibold mb-4 capitalize text-white">
-                {category}
+                {t(`footer.links.${category}`)}
               </h3>
 
               <ul className="space-y-2">
@@ -81,25 +82,23 @@ export default function Footer() {
         {/* CTA Section */}
         <div className="mx-auto container text-center">
           <h2 className="text-3xl font-extrabold sm:text-5xl">
-            Ready to Upgrade Your Car's Lighting?
+            {t("footer.cta.title")}
           </h2>
           <p className="mx-auto mt-4 max-w-md text-text/40">
-            Get in touch with our team to discuss your specific needs and
-            preferences. We're here to help you create the perfect lighting
-            solution for your vehicle.
+            {t("footer.cta.description")}
           </p>
           <a
             href="#"
             className="mt-8 inline-block rounded-full border border-red-600 px-12 py-3 text-sm font-medium text-text hover:scale-3d"
           >
-            Get Contact with Us
+            {t("footer.cta.button")}
           </a>
         </div>
 
         {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-gray-500">
-            © {currentYear} Modified Car Lights. All rights reserved.
+            {t("footer.copyright", { year: currentYear })}
           </p>
 
           <div className="flex items-center gap-3">

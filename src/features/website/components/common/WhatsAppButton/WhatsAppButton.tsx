@@ -1,9 +1,10 @@
-
+import { useTranslation } from "react-i18next";
 import { FaWhatsapp } from "react-icons/fa";
 
 export default function WhatsAppButton() {
-  const phoneNumber = "201069022024"; // ✅ رقمك بدون "+"
-  const message = "Hi! I'm interested in your modified car lights project."; // ✅ الرسالة اللي هتظهر في واتساب
+  const { t } = useTranslation();
+  const phoneNumber = "201069022024"; 
+  const message = t("common.whatsappMessage"); 
   const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
     message
   )}`;
