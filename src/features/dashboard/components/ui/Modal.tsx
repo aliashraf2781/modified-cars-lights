@@ -20,8 +20,8 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
     if (!isOpen) return null;
 
     return createPortal(
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm">
-            <div className="bg-gray-800 rounded-lg shadow-2xl w-full max-w-md mx-4 border border-gray-700 animate-fade-in-up">
+        <div className="fixed inset-0 z-50 overflow-y-auto p-10 flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm">
+            <div className="bg-gray-800 overflow-y-auto rounded-lg shadow-2xl w-full max-w-md mx-4 border border-gray-700 animate-fade-in-up">
                 <div className="flex justify-between items-center p-4 border-b border-gray-700">
                     <h3 className="text-xl font-semibold text-white">{title}</h3>
                     <button onClick={onClose} className="text-gray-400 hover:text-white transition-colors">

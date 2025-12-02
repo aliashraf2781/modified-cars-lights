@@ -11,6 +11,7 @@ export interface Topic {
     description: string | null;
     content: string | null;
     video: string | null;
+    images: string[] | null;
     lights_category: { id: number; name: string }[] | null;
     car_category: { id: number; name: string }[] | null;
 }
@@ -19,6 +20,14 @@ interface CreateTopic {
     name_en: string;
     name_ar: string;
     logo?: string;
+    video_url?: string;
+    images?: string[];
+    des_en?: string;
+    des_ar?: string;
+    content_en?: string;
+    content_ar?: string;
+    type_id?: number | null;
+    category_id?: number | null;
 }
 
 interface UpdateTopic extends CreateTopic {
@@ -37,7 +46,7 @@ export function useTopics({
     carCategory?: string | null;
     lightsCategory?: string | null;
 }) {
-    const  { i18n } = useTranslation();
+    const { i18n } = useTranslation();
     const lang = i18n.language;
 
     const [topics, setTopics] = useState<Topic[]>([]);
@@ -59,10 +68,10 @@ export function useTopics({
 
         const selectQuery =
             lang === "en"
-                ? `id, name:name_en, description:des_en, content:content_en, video:video_url,
+                ? `id, name:name_en, description:des_en, content:content_en, video:video_url, images,
            lights_category:topic_type(id, name:name_en),
            car_category:sub_category(id, name:name_en)`
-                : `id, name:name_ar, description:des_ar, content:content_ar, video:video_url,
+                : `id, name:name_ar, description:des_ar, content:content_ar, video:video_url, images,
            lights_category:topic_type(id, name:name_ar),
            car_category:sub_category(id, name:name_ar)`;
 
