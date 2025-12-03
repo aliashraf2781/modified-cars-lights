@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useForm, type SubmitHandler } from "react-hook-form";
+import { useEffect, useState } from "react";
+import { useForm, useWatch, type SubmitHandler } from "react-hook-form";
 import { useTopicTypes } from "../../core/hooks/useTopicTypes";
 import { useTopics } from "../../core/hooks/useTopics";
 import { useCategories } from "../../core/hooks/useCategories";
@@ -43,7 +43,7 @@ export default function TopicsManagement() {
     const [selectedBrandId, setSelectedBrandId] = useState<string>("");
 
     // Fetch subcategories (cars) based on selected brand
-    const { subCategories: carModels, fetchSubCategories } = useSubCategories(selectedBrandId);
+    const { subCategories: carModels } = useSubCategories(selectedBrandId);
 
     // Modal State
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -51,18 +51,33 @@ export default function TopicsManagement() {
     const [editingItem, setEditingItem] = useState<TopicType | Topic | null>(null);
 
     // Forms
-    const { register: registerType, handleSubmit: handleSubmitType, reset: resetType, setValue: setValueType, watch: watchType, formState: { errors: errorsType } } = useForm<TopicTypeFormInputs>();
-    const { register: registerTopic, handleSubmit: handleSubmitTopic, reset: resetTopic, setValue: setValueTopic, watch: watchTopic, formState: { errors: errorsTopic } } = useForm<TopicFormInputs>();
+    const { register: registerType, control: controlType, handleSubmit: handleSubmitType, reset: resetType, setValue: setValueType, formState: { errors: errorsType } } = useForm<TopicTypeFormInputs>();
+    const { register: registerTopic, control: controlTopic, handleSubmit: handleSubmitTopic, reset: resetTopic, setValue: setValueTopic, formState: { errors: errorsTopic } } = useForm<TopicFormInputs>();
 
-    const typeLogo = watchType("logo");
-    const topicImages = watchTopic("images");
+    const typeLogo = useWatch({ control: controlType, name: "logo" });
+    const topicImages = useWatch({ control: controlTopic, name: "images" });
 
-    // Effect to refetch car models when brand changes
+    // Sync form value when carModels are loaded
     useEffect(() => {
-        if (selectedBrandId) {
-            fetchSubCategories();
+        if (modalType === "topic" && editingItem && carModels.length > 0) {
+            const t = editingItem as Topic;
+            if (t.car_category) {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                const carCategoryData = t.car_category as any;
+                const car = Array.isArray(carCategoryData) ? carCategoryData[0] : carCategoryData;
+
+                if (car) {
+                    // Check if the car model exists in the loaded options
+                    const exists = carModels.find(m => m.id === car.id);
+                    if (exists) {
+                        setValueTopic("category_id", car.id);
+                    }
+                }
+            }
         }
-    }, [selectedBrandId]);
+    }, [carModels, editingItem, modalType, setValueTopic]);
+
+
 
     // Handlers
     const openModal = (type: "type" | "topic", item?: TopicType | Topic) => {
@@ -73,40 +88,62 @@ export default function TopicsManagement() {
         if (type === "type") {
             if (item) {
                 const t = item as TopicType;
-                setValueType("name_en", t.name);
-                setValueType("name_ar", t.name);
-                setValueType("logo", t.logo || "");
+                resetType({
+                    name_en: t.name,
+                    name_ar: t.name,
+                    logo: t.logo || ""
+                });
             } else {
-                resetType();
-                setValueType("logo", "");
+                resetType({
+                    name_en: "",
+                    name_ar: "",
+                    logo: ""
+                });
             }
         } else {
             if (item) {
                 const t = item as Topic;
-                setValueTopic("name_en", t.name);
-                setValueTopic("name_ar", t.name);
-                setValueTopic("des_en", t.description || "");
-                setValueTopic("des_ar", t.description || "");
-                setValueTopic("content_en", t.content || "");
-                setValueTopic("content_ar", t.content || "");
-                setValueTopic("video_url", t.video || "");
-                setValueTopic("images", t.images || []);
+                let brandId = "";
+                let modelId = 0;
 
                 // Handle Car Category Pre-selection
-                if (t.car_category && t.car_category.length > 0) {
-                    const car = t.car_category[0];
-                    // We need to set the brand first to load the cars
-                    setSelectedBrandId(car.category_id.toString());
-                    // Then set the car model
-                    setValueTopic("category_id", car.id);
-                } else {
-                    setSelectedBrandId("");
-                    setValueTopic("category_id", 0);
+                if (t.car_category) {
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    const carCategoryData = t.car_category as any;
+                    const car = Array.isArray(carCategoryData) ? carCategoryData[0] : carCategoryData;
+
+                    if (car) {
+                        brandId = car.category_id.toString();
+                        modelId = car.id;
+                    }
                 }
+
+                setSelectedBrandId(brandId);
+
+                resetTopic({
+                    name_en: t.name,
+                    name_ar: t.name,
+                    des_en: t.description || "",
+                    des_ar: t.description || "",
+                    content_en: t.content || "",
+                    content_ar: t.content || "",
+                    video_url: t.video || "",
+                    images: t.images || [],
+                    category_id: modelId
+                });
             } else {
-                resetTopic();
-                setValueTopic("images", []);
                 setSelectedBrandId("");
+                resetTopic({
+                    name_en: "",
+                    name_ar: "",
+                    des_en: "",
+                    des_ar: "",
+                    content_en: "",
+                    content_ar: "",
+                    video_url: "",
+                    images: [],
+                    category_id: 0
+                });
             }
         }
     };
@@ -169,11 +206,11 @@ export default function TopicsManagement() {
     };
 
     return (
-        <div className="p-6 bg-gray-900 min-h-screen text-white space-y-8">
-            <header className="flex justify-between items-center border-b border-gray-800 pb-6">
+        <div className="p-6 bg-neutral-900 min-h-screen text-gray-100 space-y-8">
+            <header className="flex justify-between items-center border-b border-neutral-800 pb-6">
                 <div>
-                    <h1 className="text-3xl font-bold text-red-500">Topics Management</h1>
-                    <p className="text-gray-400 mt-1">Manage topic types and individual topics</p>
+                    <h1 className="text-3xl font-bold bg-linear-to-r from-gray-100 to-gray-400 bg-clip-text text-transparent">Topics Management</h1>
+                    <p className="text-gray-500 mt-1">Manage topic types and individual topics</p>
                 </div>
                 <button
                     onClick={() => openModal("type")}
@@ -193,55 +230,60 @@ export default function TopicsManagement() {
                         <div
                             key={type.id}
                             onClick={() => setSelectedTypeId(selectedTypeId === type.id.toString() ? null : type.id.toString())}
-                            className={`relative group bg-gray-800 rounded-xl p-6 border-2 transition-all cursor-pointer hover:-translate-y-1 hover:shadow-xl ${selectedTypeId === type.id.toString()
+                            className={`relative group bg-linear-to-br from-neutral-800 to-black rounded-xl p-6 border transition-all cursor-pointer hover:-translate-y-1 hover:shadow-xl overflow-hidden ${selectedTypeId === type.id.toString()
                                 ? "border-red-500 shadow-red-900/20"
-                                : "border-gray-700 hover:border-gray-600"
+                                : "border-neutral-800 hover:border-red-400"
                                 }`}
                         >
-                            <div className="flex justify-between items-start mb-4">
-                                <div className="p-3 bg-gray-700 rounded-lg">
-                                    {type.logo ? (
-                                        <img src={type.logo} alt={type.name} className="w-12 h-12 object-contain" />
-                                    ) : (
-                                        <FaLayerGroup className="w-12 h-12 text-gray-500" />
-                                    )}
+                            <div className="absolute inset-0 bg-linear-to-br from-gray-800/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                            <div className="relative z-10">
+                                <div className="flex justify-between items-start mb-4">
+                                    <div className="p-3 bg-gray-700 rounded-lg">
+                                        {type.logo ? (
+                                            <img src={type.logo} alt={type.name} className="w-12 h-12 object-contain" />
+                                        ) : (
+                                            <FaLayerGroup className="w-12 h-12 text-gray-500" />
+                                        )}
+                                    </div>
+                                    <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <button
+                                            onClick={(e) => { e.stopPropagation(); openModal("type", type); }}
+                                            className="p-2 text-blue-400 hover:bg-blue-900/30 rounded-lg transition-colors"
+                                            title="Edit"
+                                        >
+                                            <FaEdit />
+                                        </button>
+                                        <button
+                                            onClick={(e) => { e.stopPropagation(); handleDelete("type", type.id); }}
+                                            className="p-2 text-red-400 hover:bg-red-900/30 rounded-lg transition-colors"
+                                            title="Delete"
+                                        >
+                                            <FaTrash />
+                                        </button>
+                                    </div>
                                 </div>
-                                <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <button
-                                        onClick={(e) => { e.stopPropagation(); openModal("type", type); }}
-                                        className="p-2 text-blue-400 hover:bg-blue-900/30 rounded-lg transition-colors"
-                                        title="Edit"
-                                    >
-                                        <FaEdit />
-                                    </button>
-                                    <button
-                                        onClick={(e) => { e.stopPropagation(); handleDelete("type", type.id); }}
-                                        className="p-2 text-red-400 hover:bg-red-900/30 rounded-lg transition-colors"
-                                        title="Delete"
-                                    >
-                                        <FaTrash />
-                                    </button>
-                                </div>
+                                <h3 className="text-xl font-bold text-white mb-1">{type.name}</h3>
+                                <p className="text-sm text-gray-400">ID: {type.id}</p>
                             </div>
-                            <h3 className="text-xl font-bold text-white mb-1">{type.name}</h3>
-                            <p className="text-sm text-gray-400">ID: {type.id}</p>
                         </div>
                     ))}
                 </div>
 
-                {topicTypes.length === 0 && !typesLoading && (
-                    <div className="text-center py-12 bg-gray-800/50 rounded-xl border border-dashed border-gray-700">
-                        <p className="text-gray-500">No topic types found. Create one to get started.</p>
-                    </div>
-                )}
+                {
+                    topicTypes.length === 0 && !typesLoading && (
+                        <div className="text-center py-12 bg-gray-800/50 rounded-xl border border-dashed border-gray-700">
+                            <p className="text-gray-500">No topic types found. Create one to get started.</p>
+                        </div>
+                    )
+                }
             </section>
 
             {/* Topics Section */}
-            <section className="animate-fade-in-up bg-gray-800 rounded-xl border border-gray-700 overflow-hidden">
-                <div className="p-6 border-b border-gray-700 flex justify-between items-center bg-gray-800/50">
+            <section className="animate-fade-in-up bg-neutral-900 rounded-xl border border-neutral-800 overflow-hidden">
+                <div className="p-6 border-b border-neutral-800 flex justify-between items-center bg-neutral-800/30">
                     <div className="flex items-center gap-3">
                         <FaList className="text-red-500 text-xl" />
-                        <h2 className="text-xl font-bold text-white">
+                        <h2 className="text-xl font-bold text-gray-100">
                             {selectedTypeId ? `Topics (Type ID: ${selectedTypeId})` : "All Topics"}
                         </h2>
                     </div>
@@ -255,7 +297,7 @@ export default function TopicsManagement() {
                             </button>
                             <button
                                 onClick={() => openModal("topic")}
-                                className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium"
+                                className="flex items-center gap-2 bg-neutral-800 hover:bg-neutral-700 text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium border border-neutral-700"
                             >
                                 <FaPlus /> Add Topic
                             </button>
@@ -270,7 +312,7 @@ export default function TopicsManagement() {
                     {topics.length > 0 ? (
                         <div className="grid grid-cols-4 gap-4">
                             {topics.map((topic) => (
-                                <div key={topic.id} className="bg-gray-900/50 rounded-lg border border-gray-700 p-4 hover:border-gray-600 transition-colors group">
+                                <div key={topic.id} className="bg-linear-to-br from-neutral-800 to-black rounded-lg border border-neutral-800 p-4 hover:border-red-400 transition-colors group">
                                     <div className="flex justify-between items-start">
                                         <div className="space-y-2">
                                             <div className="flex items-center gap-3">
