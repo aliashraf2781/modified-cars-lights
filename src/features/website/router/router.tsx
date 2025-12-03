@@ -13,13 +13,18 @@ import DashboardLayout from "../../dashboard/layout/DashboardLayout";
 import Dashboard from "../../dashboard/pages/Dashboard";
 import CategoriesManagement from "../../dashboard/pages/CategoriesManagement";
 import TopicsManagement from "../../dashboard/pages/TopicsManagement";
-
+import NotFound from "../pages/NotFound/NotFound.tsx";
 const Products = lazy(() => import("../pages/Products/Products"));
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Navigate to="/ar" replace />,
+  },
+  // not found route
+  {
+    path: "*",
+    element: <NotFound />,
   },
   {
     path: "/:lang",
