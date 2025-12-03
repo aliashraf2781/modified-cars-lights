@@ -21,7 +21,6 @@ const router = createBrowserRouter([
     path: "/",
     element: <Navigate to="/ar" replace />,
   },
-  // not found route
   {
     path: "*",
     element: <NotFound />,
