@@ -117,11 +117,11 @@ export default function CategoriesManagement() {
     };
 
     return (
-        <div className="p-6 bg-gray-900 min-h-screen text-white space-y-8">
-            <header className="flex justify-between items-center border-b border-gray-800 pb-6">
+        <div className="p-6 bg-neutral-900 min-h-screen text-gray-100 space-y-8">
+            <header className="flex justify-between items-center border-b border-neutral-800 pb-6">
                 <div>
-                    <h1 className="text-3xl font-bold text-red-500">Categories Management</h1>
-                    <p className="text-gray-400 mt-1">Manage your main categories and their sub-categories</p>
+                    <h1 className="text-3xl font-bold bg-linear-to-r from-gray-100 to-gray-400 bg-clip-text text-transparent">Categories Management</h1>
+                    <p className="text-gray-500 mt-1">Manage your main categories and their sub-categories</p>
                 </div>
                 <button
                     onClick={() => openModal("category")}
@@ -141,62 +141,67 @@ export default function CategoriesManagement() {
                         <div
                             key={cat.id}
                             onClick={() => setSelectedCategoryId(cat.id.toString())}
-                            className={`relative group bg-gray-800 rounded-xl p-6 border-2 transition-all cursor-pointer hover:-translate-y-1 hover:shadow-xl ${selectedCategoryId === cat.id.toString()
-                                    ? "border-red-500 shadow-red-900/20"
-                                    : "border-gray-700 hover:border-gray-600"
+                            className={`relative group bg-linear-to-br from-neutral-800 to-black rounded-xl p-6 border transition-all cursor-pointer hover:-translate-y-1 hover:shadow-xl overflow-hidden ${selectedCategoryId === cat.id.toString()
+                                ? "border-red-500 shadow-red-900/20"
+                                : "border-neutral-800 hover:border-red-400"
                                 }`}
                         >
-                            <div className="flex justify-between items-start mb-4">
-                                <div className="p-3 bg-gray-700 rounded-lg">
-                                    {cat.logo ? (
-                                        <img src={cat.logo} alt={cat.name} className="w-12 h-12 object-contain" />
-                                    ) : (
-                                        <FaFolder className="w-12 h-12 text-gray-500" />
-                                    )}
+                            <div className="absolute inset-0 bg-linear-to-br from-gray-800/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                            <div className="relative z-10">
+                                <div className="flex justify-between items-start mb-4">
+                                    <div className="p-3 bg-gray-700 rounded-lg">
+                                        {cat.logo ? (
+                                            <img src={cat.logo} alt={cat.name} className="w-12 h-12 object-contain" />
+                                        ) : (
+                                            <FaFolder className="w-12 h-12 text-gray-500" />
+                                        )}
+                                    </div>
+                                    <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <button
+                                            onClick={(e) => { e.stopPropagation(); openModal("category", cat); }}
+                                            className="p-2 text-blue-400 hover:bg-blue-900/30 rounded-lg transition-colors"
+                                            title="Edit"
+                                        >
+                                            <FaEdit />
+                                        </button>
+                                        <button
+                                            onClick={(e) => { e.stopPropagation(); handleDelete("category", cat.id.toString()); }}
+                                            className="p-2 text-red-400 hover:bg-red-900/30 rounded-lg transition-colors"
+                                            title="Delete"
+                                        >
+                                            <FaTrash />
+                                        </button>
+                                    </div>
                                 </div>
-                                <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <button
-                                        onClick={(e) => { e.stopPropagation(); openModal("category", cat); }}
-                                        className="p-2 text-blue-400 hover:bg-blue-900/30 rounded-lg transition-colors"
-                                        title="Edit"
-                                    >
-                                        <FaEdit />
-                                    </button>
-                                    <button
-                                        onClick={(e) => { e.stopPropagation(); handleDelete("category", cat.id.toString()); }}
-                                        className="p-2 text-red-400 hover:bg-red-900/30 rounded-lg transition-colors"
-                                        title="Delete"
-                                    >
-                                        <FaTrash />
-                                    </button>
-                                </div>
+                                <h3 className="text-xl font-bold text-white mb-1">{cat.name}</h3>
+                                <p className="text-sm text-gray-400">ID: {cat.id}</p>
                             </div>
-                            <h3 className="text-xl font-bold text-white mb-1">{cat.name}</h3>
-                            <p className="text-sm text-gray-400">ID: {cat.id}</p>
                         </div>
                     ))}
                 </div>
 
-                {categories.length === 0 && !catLoading && (
-                    <div className="text-center py-12 bg-gray-800/50 rounded-xl border border-dashed border-gray-700">
-                        <p className="text-gray-500">No categories found. Create one to get started.</p>
-                    </div>
-                )}
+                {
+                    categories.length === 0 && !catLoading && (
+                        <div className="text-center py-12 bg-gray-800/50 rounded-xl border border-dashed border-gray-700">
+                            <p className="text-gray-500">No categories found. Create one to get started.</p>
+                        </div>
+                    )
+                }
             </section>
 
             {/* SubCategories Section */}
             {selectedCategoryId && (
-                <section className="animate-fade-in-up bg-gray-800 rounded-xl border border-gray-700 overflow-hidden">
-                    <div className="p-6 border-b border-gray-700 flex justify-between items-center bg-gray-800/50">
+                <section className="animate-fade-in-up bg-neutral-900 rounded-xl border border-neutral-800 overflow-hidden">
+                    <div className="p-6 border-b border-neutral-800 flex justify-between items-center bg-neutral-800/30">
                         <div className="flex items-center gap-3">
                             <FaFolderOpen className="text-red-500 text-xl" />
-                            <h2 className="text-xl font-bold text-white">
+                            <h2 className="text-xl font-bold text-gray-100">
                                 SubCategories <span className="text-gray-500 text-sm font-normal ml-2">(Category ID: {selectedCategoryId})</span>
                             </h2>
                         </div>
                         <button
                             onClick={() => openModal("subcategory")}
-                            className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium"
+                            className="flex items-center gap-2 bg-neutral-800 hover:bg-neutral-700 text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium border border-neutral-700"
                         >
                             <FaPlus /> Add SubCategory
                         </button>
@@ -209,7 +214,7 @@ export default function CategoriesManagement() {
                         {subCategories.length > 0 ? (
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                                 {subCategories.map((sub) => (
-                                    <div key={sub.id} className="flex items-center justify-between p-4 bg-gray-900/50 rounded-lg border border-gray-700 hover:border-gray-600 transition-colors group">
+                                    <div key={sub.id} className="flex items-center justify-between p-4 bg-linear-to-br from-neutral-800 to-black rounded-lg border border-neutral-800 hover:border-red-400 transition-colors group">
                                         <span className="font-medium text-gray-200">{sub.name}</span>
                                         <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                             <button

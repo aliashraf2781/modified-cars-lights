@@ -4,8 +4,8 @@ import type { subCategory } from "../types/subCategories";
 import { useTranslation } from "react-i18next";
 
 export function useSubCategories(categoryId: string) {
-     const { i18n } = useTranslation();
-     const lang = i18n.language;
+    const { i18n } = useTranslation();
+    const lang = i18n.language;
     const [subCategories, setSubCategories] = useState<subCategory[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
@@ -14,8 +14,12 @@ export function useSubCategories(categoryId: string) {
     // GET: Fetch sub categories by category_id + lang
     // -----------------------------------------------------
     const fetchSubCategories = async () => {
-        if (!categoryId) return;
+        if (!categoryId) {
+            setSubCategories([]);
+            return;
+        }
 
+        setSubCategories([]); // Clear previous data
         setLoading(true);
         setError(null);
 
