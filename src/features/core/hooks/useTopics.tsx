@@ -13,7 +13,7 @@ export interface Topic {
     video: string | null;
     images: string[] | null;
     lights_category: { id: number; name: string }[] | null;
-    car_category: { id: number; name: string }[] | null;
+    car_category: { id: number; name: string; category_id: number }[] | null;
 }
 
 interface CreateTopic {
@@ -70,10 +70,10 @@ export function useTopics({
             lang === "en"
                 ? `id, name:name_en, description:des_en, content:content_en, video:video_url, images,
            lights_category:topic_type(id, name:name_en),
-           car_category:sub_category(id, name:name_en)`
+           car_category:sub_category(id, name:name_en, category_id)`
                 : `id, name:name_ar, description:des_ar, content:content_ar, video:video_url, images,
            lights_category:topic_type(id, name:name_ar),
-           car_category:sub_category(id, name:name_ar)`;
+           car_category:sub_category(id, name:name_ar, category_id)`;
 
         const { data, error } = await supabase
             .from("topics")

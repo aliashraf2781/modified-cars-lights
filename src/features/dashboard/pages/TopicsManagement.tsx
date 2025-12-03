@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { useTopicTypes } from "../../core/hooks/useTopicTypes";
 import { useTopics } from "../../core/hooks/useTopics";
+import { useCategories } from "../../core/hooks/useCategories";
+import { useSubCategories } from "../../core/hooks/useSubCategories";
 import Modal from "../components/ui/Modal";
 import ImageUpload from "../components/ui/ImageUpload";
 import { FaEdit, FaTrash, FaPlus, FaVideo, FaImages, FaLayerGroup, FaList } from "react-icons/fa";
@@ -24,6 +26,7 @@ interface TopicFormInputs {
     content_ar: string;
     video_url: string;
     images: string[];
+    category_id: number; // This is the car model (subcategory) ID
 }
 
 export default function TopicsManagement() {
@@ -33,6 +36,14 @@ export default function TopicsManagement() {
     const { topics, loading: topicsLoading, error: topicsError, createTopic, updateTopic, deleteTopic } = useTopics({
         lightsCategory: selectedTypeId
     });
+
+    const { categories: brands } = useCategories();
+
+    // State for the form
+    const [selectedBrandId, setSelectedBrandId] = useState<string>("");
+
+    // Fetch subcategories (cars) based on selected brand
+    const { subCategories: carModels, fetchSubCategories } = useSubCategories(selectedBrandId);
 
     // Modal State
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -45,6 +56,13 @@ export default function TopicsManagement() {
 
     const typeLogo = watchType("logo");
     const topicImages = watchTopic("images");
+
+    // Effect to refetch car models when brand changes
+    useEffect(() => {
+        if (selectedBrandId) {
+            fetchSubCategories();
+        }
+    }, [selectedBrandId]);
 
     // Handlers
     const openModal = (type: "type" | "topic", item?: TopicType | Topic) => {
@@ -73,9 +91,22 @@ export default function TopicsManagement() {
                 setValueTopic("content_ar", t.content || "");
                 setValueTopic("video_url", t.video || "");
                 setValueTopic("images", t.images || []);
+
+                // Handle Car Category Pre-selection
+                if (t.car_category && t.car_category.length > 0) {
+                    const car = t.car_category[0];
+                    // We need to set the brand first to load the cars
+                    setSelectedBrandId(car.category_id.toString());
+                    // Then set the car model
+                    setValueTopic("category_id", car.id);
+                } else {
+                    setSelectedBrandId("");
+                    setValueTopic("category_id", 0);
+                }
             } else {
                 resetTopic();
                 setValueTopic("images", []);
+                setSelectedBrandId("");
             }
         }
     };
@@ -85,6 +116,7 @@ export default function TopicsManagement() {
         setEditingItem(null);
         resetType();
         resetTopic();
+        setSelectedBrandId("");
     };
 
     const onTypeSubmit: SubmitHandler<TopicTypeFormInputs> = async (data) => {
@@ -103,7 +135,11 @@ export default function TopicsManagement() {
 
     const onTopicSubmit: SubmitHandler<TopicFormInputs> = async (data) => {
         try {
-            const payload = { ...data, type_id: selectedTypeId ? parseInt(selectedTypeId) : null };
+            const payload = {
+                ...data,
+                type_id: selectedTypeId ? parseInt(selectedTypeId) : null,
+                category_id: data.category_id ? Number(data.category_id) : null
+            };
 
             if (editingItem) {
                 await updateTopic({ id: editingItem.id, ...payload });
@@ -158,8 +194,8 @@ export default function TopicsManagement() {
                             key={type.id}
                             onClick={() => setSelectedTypeId(selectedTypeId === type.id.toString() ? null : type.id.toString())}
                             className={`relative group bg-gray-800 rounded-xl p-6 border-2 transition-all cursor-pointer hover:-translate-y-1 hover:shadow-xl ${selectedTypeId === type.id.toString()
-                                    ? "border-red-500 shadow-red-900/20"
-                                    : "border-gray-700 hover:border-gray-600"
+                                ? "border-red-500 shadow-red-900/20"
+                                : "border-gray-700 hover:border-gray-600"
                                 }`}
                         >
                             <div className="flex justify-between items-start mb-4">
@@ -232,7 +268,7 @@ export default function TopicsManagement() {
                     {topicsError && <div className="text-red-400 py-2">Error: {topicsError}</div>}
 
                     {topics.length > 0 ? (
-                        <div className="grid grid-cols-1 gap-4">
+                        <div className="grid grid-cols-4 gap-4">
                             {topics.map((topic) => (
                                 <div key={topic.id} className="bg-gray-900/50 rounded-lg border border-gray-700 p-4 hover:border-gray-600 transition-colors group">
                                     <div className="flex justify-between items-start">
@@ -241,6 +277,11 @@ export default function TopicsManagement() {
                                                 <h3 className="text-lg font-bold text-white">{topic.name}</h3>
                                                 {topic.video && <FaVideo className="text-red-500" title="Has Video" />}
                                                 {topic.images && topic.images.length > 0 && <FaImages className="text-blue-500" title={`Has ${topic.images.length} Images`} />}
+                                                {topic.car_category && topic.car_category.length > 0 && (
+                                                    <span className="text-xs bg-gray-700 px-2 py-1 rounded text-gray-300">
+                                                        {topic.car_category[0].name}
+                                                    </span>
+                                                )}
                                             </div>
                                             <p className="text-gray-400 text-sm line-clamp-2 max-w-2xl">{topic.description || "No description"}</p>
                                         </div>
@@ -315,6 +356,36 @@ export default function TopicsManagement() {
                     </form>
                 ) : (
                     <form onSubmit={handleSubmitTopic(onTopicSubmit)} className="space-y-6">
+                        {/* Brand and Car Model Selection */}
+                        <div className="grid grid-cols-2 gap-4 p-4 bg-gray-700/30 rounded-lg border border-gray-700">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-400 mb-1">Car Brand</label>
+                                <select
+                                    value={selectedBrandId}
+                                    onChange={(e) => setSelectedBrandId(e.target.value)}
+                                    className="w-full bg-gray-700 border border-gray-600 rounded-lg p-2.5 text-white focus:border-red-500 focus:ring-1 focus:ring-red-500 focus:outline-none transition-colors"
+                                >
+                                    <option value="">Select Brand</option>
+                                    {brands.map((brand) => (
+                                        <option key={brand.id} value={brand.id}>{brand.name}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-400 mb-1">Car Model</label>
+                                <select
+                                    {...registerTopic("category_id", { required: "Car model is required" })}
+                                    className="w-full bg-gray-700 border border-gray-600 rounded-lg p-2.5 text-white focus:border-red-500 focus:ring-1 focus:ring-red-500 focus:outline-none transition-colors"
+                                >
+                                    <option value="">Select Model</option>
+                                    {carModels.map((model) => (
+                                        <option key={model.id} value={model.id}>{model.name}</option>
+                                    ))}
+                                </select>
+                                {errorsTopic.category_id && <span className="text-red-500 text-xs mt-1">{errorsTopic.category_id.message}</span>}
+                            </div>
+                        </div>
+
                         <div className="grid grid-cols-2 gap-4">
                             <div>
                                 <label className="block text-sm font-medium text-gray-400 mb-1">Name (English)</label>
