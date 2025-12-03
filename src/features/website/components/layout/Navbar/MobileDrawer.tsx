@@ -1,6 +1,7 @@
 import { IoClose } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
 import LanguageSwitcher from "../../common/LanguageSwitcher/LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 interface NavLinkItem {
   name: string;
@@ -18,6 +19,10 @@ export default function MobileDrawer({
   onClose,
   navLinks,
 }: MobileDrawerProps) {
+  const { i18n } = useTranslation();
+  const language = i18n.language;
+ 
+
   return (
     <>
       {/* Overlay */}
@@ -51,6 +56,7 @@ export default function MobileDrawer({
         <div className="flex flex-col space-y-4 p-5">
           {navLinks.map((link) => (
             <NavLink
+              end
               key={link.name}
               to={link.href}
               onClick={onClose}
@@ -66,7 +72,9 @@ export default function MobileDrawer({
             </NavLink>
           ))}
 
-          <LanguageSwitcher />
+          <LanguageSwitcher
+            currentLocale={language}
+            />
         </div>
       </div>
     </>
