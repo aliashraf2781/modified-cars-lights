@@ -20,7 +20,7 @@
   },
   "footer": {
     "description": "Upgrade your ride with premium lighting — performance and style in every beam.",
-    "address": "Egypt, Dakahlia, Mansoura, Saad El Sherbini Street, in front of Kazyon",
+    "address": "Saad El-Sherbiny, Mansoura Qism 2, El Mansoura, Dakahlia Governorate 7660101",
     "links": {
       "products": "Products",
       "company": "Company",
@@ -31,7 +31,7 @@
       "ourStory": "Our Story",
       "contact": "Contact",
       "faqs": "FAQs"
-    },  
+    },
     "cta": {
       "title": "Ready to Upgrade Your Car's Lighting?",
       "description": "Get in touch with our team to discuss your specific needs and preferences. We're here to help you create the perfect lighting solution for your vehicle.",
@@ -52,57 +52,58 @@
   "about": {
     "header": {
       "title": "About Us",
-      "subtitle": "Making a difference through creativity and excellence"
+      "subtitle": "Specialists in Professional Car Light Modifications"
     },
     "story": {
       "title": "Our Story",
-      "text1": "We are a team of creators and innovators who believe in the power of technology to change the world. Since our inception, our sole goal has been to provide outstanding digital solutions that help our clients succeed and excel in their fields.",
-      "text2": "We combine extensive experience with a passion for innovation to deliver services that exceed expectations. Every project for us is a new opportunity to prove our commitment to excellence and quality."
+      "text1": "We specialize in upgrading and customizing car headlights and taillights with high-quality lighting solutions. Our journey began with a simple goal: to help every car owner enhance their vehicle’s lighting performance and appearance with professional, reliable, and stylish modifications.",
+      "text2": "Over the years, we’ve worked on hundreds of vehicles across different brands and models, gaining deep expertise in Bi-LED projectors, DRLs, Angel Eyes, RGB systems, laser modules, thermal headlight opening and sealing, restoring clarity, and vapor-proof insulation. Every job we complete follows precise techniques to deliver the best results possible."
     },
     "features": {
       "title": "Why Choose Us",
       "items": {
         "speed": {
-          "title": "High Speed",
-          "desc": "We provide exceptional performance and superior loading speeds"
+          "title": "Fast Execution",
+          "desc": "Professional work delivered quickly without affecting light quality or headlight integrity."
         },
         "innovation": {
-          "title": "Innovative Ideas",
-          "desc": "Creative solutions that meet modern needs"
+          "title": "Custom Lighting Ideas",
+          "desc": "Unique designs including Angel Eyes, DRL lines, RGB systems, projectors, and custom effects based on your vision."
         },
         "team": {
-          "title": "Professional Team",
-          "desc": "Experts specializing in all fields"
+          "title": "Skilled Technicians",
+          "desc": "Experienced specialists in headlight disassembly, thermal opening, sealing, wiring, and precision adjustments."
         },
         "support": {
-          "title": "Continuous Support",
-          "desc": "We are with you around the clock"
+          "title": "Warranty & After-Service",
+          "desc": "We provide warranty on all work and offer follow-up support for any concerns after installation."
         }
       }
     },
     "stats": {
       "title": "Our Numbers Speak",
       "items": {
-        "clients": "Satisfied Client",
-        "projects": "Completed Project",
-        "awards": "Award",
-        "support": "Technical Support"
+        "clients": "Satisfied Customers",
+        "projects": "Lights Modified",
+        "awards": "Years of Experience",
+        "support": "After-Service Support"
       }
     },
     "values": {
       "title": "Our Values",
       "items": [
-        "Commitment to Quality and Excellence",
-        "Continuous Innovation and Development",
-        "Transparency and Credibility",
-        "Customer Satisfaction is Top Priority"
+        "Using premium-grade LEDs, projectors, and lighting components for powerful and reliable results.",
+        "Performing every step with high accuracy — from opening headlights to sealing and adjustment.",
+        "Prioritizing road safety by ensuring focused beams without dazzling other drivers.",
+        "Providing guaranteed work against moisture, low brightness, or installation defects."
       ]
     },
     "footer": {
-      "text": "Together We Build the Future",
+      "text": "Stronger Light — Better Style — Guaranteed Quality",
       "copyright": "All rights reserved © 2024"
     }
   },
+
   "contact": {
     "title": "Contact Us",
     "subtitle": "First website in Egypt specialized in car lighting modifications ( front and rear lights, headlights, and interior and exterior car lighting and others )",
@@ -129,6 +130,11 @@
     "branding": {
       "title": "Mod Your Ride – Unleash Your Car’s True Potential!",
       "description": "We specialize in professional car light modification and upgrades. From standard headlights to powerful LED and Xenon setups, we enhance brightness, visibility, and overall vehicle style. Our mission is to boost night driving safety while giving your car a modern, standout look. Whether you want a sporty vibe or a premium lighting upgrade, we provide high-quality results with original materials."
+    },
+    "search": {
+      "placeholder": "Search by brand name",
+      "button": "Search",
+      "noResults": "No results"
     }
   }
 }

@@ -1,15 +1,15 @@
 import { Helmet } from "react-helmet";
 import { useParams } from "react-router";
-import SectionHeader from "../../components/common/SectionHeader/SectionHeader";
 import { useTopics } from "../../../core/hooks/useTopics";
 import TopicCard from "../../components/ui/ProductCard/ProductCard";
 import { useTranslation } from "react-i18next";
+import Loader from "../../components/common/Loader/Loader";
 
 export default function Products() {
   const categoryId = useParams().categoryId;
-  const { topics } = useTopics({ carCategory: categoryId });
+  const { topics, loading } = useTopics({ carCategory: categoryId });
   const { t, i18n } = useTranslation();
-  const lang = i18n.language; 
+  const lang = i18n.language;
 
   const pageTitle =
     lang === "ar"
@@ -21,8 +21,17 @@ export default function Products() {
       ? `استعرض أفضل المصابيح الأمامية والخلفية المعدلة وإضاءات LED للسيارات من فئة ${categoryId}. حسن مظهر سيارتك ورؤيتها بأفضل الحلول.`
       : `Explore premium modified headlights, taillights, and LED lighting products for ${categoryId} cars. Upgrade your vehicle's style and visibility.`;
 
-  const pageUrl = `https://modifiedcarlights.com/products/${categoryId}`;
-
+  const pageUrl = `https://modifiedcarlights.com/${lang}/products/${categoryId}`;
+  if (loading) {
+    return <Loader />;
+  }
+  if (!topics.length) {
+    return (
+      <div className="text-white h-screen flex items-center justify-center">
+        {lang === "ar" ? "لا يوجد منتجات" : "No products"}
+      </div>
+    );
+  }
   return (
     <>
       <Helmet>
@@ -58,18 +67,21 @@ export default function Products() {
         </script>
       </Helmet>
 
-      <div className="flex flex-col gap-6 container mx-auto mt-25 px-3 md:px-0">
-        <SectionHeader
-          titleAr={t("products.title")}
-          titleEn={t("products.title")}
-          highlightAr={t("products.highlight")}
-          highlightEN={t("products.highlight")}
-          descriptionAr={t("products.description")}
-          descriptionEn={t("products.description")}
-        />
+      <div className="flex flex-col gap-6 container mx-auto mt-25 px-3 md:px-0 min-h-[calc(100vh-12rem)]">
+        <div className="text-center">
+          <h1 className="text-3xl md:text-4xl font-bold text-text mb-3">
+            {t("products.title")}
+            <span className="text-red-600 animate-pulse">
+              {t("products.highlight")}{" "}
+            </span>
+          </h1>
+          <p className="text-gray-400 text-sm md:text-base">
+            {t("products.description")}
+          </p>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {topics.map((topic ) => (
+          {topics.map((topic) => (
             <TopicCard key={topic.id} topic={topic} />
           ))}
         </div>
