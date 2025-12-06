@@ -10,9 +10,9 @@ export default function PromotionBannerSection() {
         className="object-cover rounded-lg w-full h-full opacity-30"
       />
       <div className="absolute inset-0 bg-linear-to-t from-primary/15" />
-      <h2 className="absolute z-50 text-xl md:text-4xl text-text font-bold text-center">
+      <h3 className="absolute z-50 text-xl md:text-4xl text-text font-bold text-center">
         {t("home.promotionBanner")}
-      </h2>
+      </h3>
     </div>
   );
 }

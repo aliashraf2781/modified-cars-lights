@@ -1,4 +1,3 @@
-import { lazy, Suspense } from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import App from "../../../App";
 import WebsiteLayout from "../components/layout/WebsiteLayout";
@@ -14,7 +13,7 @@ import Dashboard from "../../dashboard/pages/Dashboard";
 import CategoriesManagement from "../../dashboard/pages/CategoriesManagement";
 import TopicsManagement from "../../dashboard/pages/TopicsManagement";
 import NotFound from "../pages/NotFound/NotFound.tsx";
-const Products = lazy(() => import("../pages/Products/Products"));
+import Products from "../pages/Products/Products";
 
 const router = createBrowserRouter([
   {
@@ -46,13 +45,7 @@ const router = createBrowserRouter([
           },
           {
             path: "products/:categoryId",
-            element: (
-              <Suspense
-                fallback={<div className="text-center">Loading...</div>}
-              >
-                <Products />
-              </Suspense>
-            ),
+            element: <Products />,
           },
         ],
       },

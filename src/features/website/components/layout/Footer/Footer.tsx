@@ -64,15 +64,12 @@ export default function Footer() {
                 className="flex  items-center gap-2 justify-center"
               >
                 <MdPhone className="text-red-600" />{" "}
-                <p
-                  dir="ltr"
-                  className="text-center"
-                >
+                <p dir="ltr" className="text-center">
                   +2010 01744902
                 </p>
               </a>
               <a
-                href="https://www.google.com/maps/search/%D8%B4%D8%A7%D8%B1%D8%B9+%D8%B3%D8%B9%D8%AF+%D8%A7%D9%84%D8%B4%D8%B1%D8%A8%D9%8A%D9%86%D9%8A+%D8%A3%D9%85%D8%A7%D9%85+%D9%83%D8%A7%D8%B2%D9%8A%D9%88%D9%86%0A%D8%A7%D9%84%D9%85%D9%86%D8%B5%D9%88%D8%B1%D9%87%E2%80%AD/@31.0388268,31.3781667,5201m/data=!3m2!1e3!4b1?hl=en&entry=ttu&g_ep=EgoyMDI1MTEyMy4xIKXMDSoASAFQAw%3D%3D"
+                href="https://maps.app.goo.gl/Fq6R137QX2gVbLyg7"
                 target="_blank"
                 className="flex items-center gap-2  justify-center"
               >

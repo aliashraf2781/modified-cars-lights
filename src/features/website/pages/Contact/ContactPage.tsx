@@ -71,17 +71,16 @@ export default function ContactPage() {
         </script>
       </Helmet>
 
-      <div className="min-h-screen text-neutral-200">
-        <div className="container mx-auto px-5 md:px-0 py-20 flex flex-col gap-6">
+      <div className="min-h-screen py-30 px-5 md:px-0 text-text container mx-auto">
+        <div className=" flex flex-col gap-6">
           <h1 className="text-6xl font-bold mb-5 text-red-700 flex flex-col gap-2">
             {t("contact.title")}
             <span className="text-text text-sm">{t("contact.subtitle")}</span>
           </h1>
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d219.7307974201977!2d31.034687!3d31.3848473!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f79d943b1c7d5f%3A0x959a2513409fa9ab!2sKazyon!5e1!3m2!1sar!2seg!4v1732915750000!5m2!1sar!2seg"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3452.836175234049!2d31.3800173!3d31.0347916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f79c4a903c4f51%3A0x14af68485bde74f9!2sModified%20Car%20Lights!5e0!3m2!1sen!2seg!4v1702351202!5m2!1sen!2seg"
             width="100%"
             height="400"
-            loading="lazy"
             className="rounded-lg"
           ></iframe>
 

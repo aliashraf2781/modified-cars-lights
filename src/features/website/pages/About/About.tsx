@@ -5,7 +5,6 @@ import {
   FaUsers,
   FaLightbulb,
   FaHeart,
-  FaStar,
   FaCheckCircle,
 } from "react-icons/fa";
 
@@ -52,7 +51,7 @@ export default function AboutPage() {
   const stats = [
     { number: "500+", label: t("about.stats.items.clients") },
     { number: "1000+", label: t("about.stats.items.projects") },
-    { number: "50+", label: t("about.stats.items.awards") },
+    { number: "15+", label: t("about.stats.items.awards") },
     { number: "24/7", label: t("about.stats.items.support") },
   ];
 
@@ -89,16 +88,16 @@ export default function AboutPage() {
         </script>
       </Helmet>
 
-      <div className="min-h-screen bg-primary text-text">
+      <div className="min-h-screen py-30 px-5 md:px-0 text-text container mx-auto">
         {/* Header Section */}
-        <header className="text-center py-20 px-5 bg-linear-to-br from-secondary to-primary border-b-3 border-red-700">
+        <header className="text-center  ">
           <h1 className="text-6xl font-bold mb-5 text-red-700 drop-shadow-[0_0_20px_rgba(255,87,34,0.3)]">
             {t("about.header.title")}
           </h1>
           <p className="text-2xl opacity-90">{t("about.header.subtitle")}</p>
         </header>
 
-        <div className="max-w-7xl mx-auto px-5 py-16">
+        <div className=" py-16">
           {/* About Section */}
           <section className="p-12 mb-8 rounded-2xl bg-secondary border-r-4 border-red-700 transition-all duration-300 hover:-translate-x-2 hover:shadow-xl hover:shadow-red-500/20">
             <h2 className="text-4xl font-bold mb-6 pb-4 text-red-700 border-b-2 border-red-700/30">
@@ -171,13 +170,6 @@ export default function AboutPage() {
             </div>
           </section>
         </div>
-
-        {/* Footer */}
-        <footer className="text-center py-12 mt-16 bg-secondary border-t-3 border-red-700">
-          <FaStar className="inline-block text-4xl mb-4 text-red-700 animate-pulse" />
-          <p className="text-xl">{t("about.footer.text")}</p>
-          <p className="mt-4 opacity-70">{t("about.footer.copyright")}</p>
-        </footer>
       </div>
     </>
   );
