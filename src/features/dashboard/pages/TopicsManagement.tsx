@@ -310,7 +310,7 @@ export default function TopicsManagement() {
                     {topicsError && <div className="text-red-400 py-2">Error: {topicsError}</div>}
 
                     {topics.length > 0 ? (
-                        <div className="grid grid-cols-4 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl: gap-4">
                             {topics.map((topic) => (
                                 <div key={topic.id} className="bg-linear-to-br from-neutral-800 to-black rounded-lg border border-neutral-800 p-4 hover:border-red-400 transition-colors group">
                                     <div className="flex justify-between items-start">
