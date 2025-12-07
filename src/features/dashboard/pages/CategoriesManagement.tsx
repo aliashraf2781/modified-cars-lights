@@ -15,11 +15,11 @@ import type { Brand } from "../../core/types/categories.";
 import type { subCategory } from "../../core/types/subCategories";
 import { Helmet } from "react-helmet";
 
-// Form Types
 interface CategoryFormInputs {
   name_en: string;
   name_ar: string;
   logo: string;
+  high_end: boolean;
 }
 
 interface SubCategoryFormInputs {
@@ -93,9 +93,11 @@ export default function CategoriesManagement() {
         setValueCat("name_en", cat.name);
         setValueCat("name_ar", cat.name);
         setValueCat("logo", cat.logo || "");
+        setValueCat("high_end", cat.high_end);
       } else {
         resetCat();
         setValueCat("logo", "");
+        setValueCat("high_end", false);
       }
     } else {
       if (item) {
@@ -204,11 +206,10 @@ export default function CategoriesManagement() {
               <div
                 key={cat.id}
                 onClick={() => setSelectedCategoryId(cat.id.toString())}
-                className={`relative group bg-linear-to-br from-neutral-800 to-black rounded-xl p-6 border transition-all cursor-pointer hover:-translate-y-1 hover:shadow-xl overflow-hidden ${
-                  selectedCategoryId === cat.id.toString()
-                    ? "border-red-500 shadow-red-900/20"
-                    : "border-neutral-800 hover:border-red-400"
-                }`}
+                className={`relative group bg-linear-to-br from-neutral-800 to-black rounded-xl p-6 border transition-all cursor-pointer hover:-translate-y-1 hover:shadow-xl overflow-hidden ${selectedCategoryId === cat.id.toString()
+                  ? "border-red-500 shadow-red-900/20"
+                  : "border-neutral-800 hover:border-red-400"
+                  }`}
               >
                 <div className="absolute inset-0 bg-linear-to-br from-gray-800/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="relative z-10">
@@ -386,6 +387,24 @@ export default function CategoriesManagement() {
                     </span>
                   )}
                 </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-400 mb-1">
+                  High End Category
+                </label>
+                <select
+                  {...registerCat("high_end", {
+                    setValueAs: (v) => v === "true" || v === true,
+                  })}
+                  className="w-full bg-gray-700 border border-gray-600 rounded-lg p-2.5 text-white focus:border-red-500 focus:ring-1 focus:ring-red-500 focus:outline-none transition-colors"
+                >
+                  <option value="false">No</option>
+                  <option value="true">Yes</option>
+                </select>
+                <p className="text-xs text-gray-500 mt-1">
+                  High end categories will be highlighted in the app
+                </p>
               </div>
 
               <div>

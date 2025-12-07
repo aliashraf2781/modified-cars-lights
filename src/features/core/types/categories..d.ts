@@ -8,5 +8,5 @@ export interface Brand {
   id: string;
   name: string;
   logo: string;
-  important: boolean;
+  high_end: boolean;
 }
