@@ -4,8 +4,8 @@ import type { Brand } from "../types/categories.";
 import { useTranslation } from "react-i18next";
 
 export function useCategories() {
-     const { i18n } = useTranslation();
-     const lang = i18n.language;
+    const { i18n } = useTranslation();
+    const lang = i18n.language;
     const [categories, setCategories] = useState<Brand[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
@@ -19,12 +19,15 @@ export function useCategories() {
             .from("categories")
             .select(
                 lang === "en"
-                    ? "id, name:name_en, logo"
-                    : "id, name:name_ar, logo"
+                    ? "id, name:name_en, logo, important:high_end"
+                    : "id, name:name_ar, logo, important:high_end"
             );
 
         if (error) setError(error.message);
-        else setCategories(data);
+
+        else setCategories(
+            data.sort((a, b) => Number(b.important) - Number(a.important))
+        );
 
         setLoading(false);
     };
