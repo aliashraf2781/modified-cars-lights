@@ -73,7 +73,7 @@ export default function ContactPage() {
 
       <div className="min-h-screen py-30 px-5 md:px-0 text-text container mx-auto">
         <div className=" flex flex-col gap-6">
-          <h1 className="text-6xl font-bold mb-5 text-red-700 flex flex-col gap-2">
+          <h1 className="text-6xl font-bold mb-5 text-text flex flex-col gap-2">
             {t("contact.title")}
             <span className="text-text text-sm">{t("contact.subtitle")}</span>
           </h1>
@@ -101,7 +101,7 @@ export default function ContactPage() {
               href="https://www.youtube.com/@modifiedcarlights"
               className="p-6 rounded-lg flex flex-col bg-secondary gap-2 items-center hover:shadow-lg hover:border-gray-300 hover:border-2 hover:scale-105 transition-all duration-300 cursor-pointer"
             >
-              <FaYoutube className="w-25 h-25 text-red-700 bg-white p-3 rounded-xl" />
+              <FaYoutube className="w-25 h-25 text-red-600 bg-white p-3 rounded-xl" />
               <p className="text-text text-center text-sm">
                 {t("contact.youtube")}
               </p>
