@@ -19,7 +19,6 @@ export default function BrandList({ brands, selectedBrand, onSelect }: Props) {
   const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
 
-  // الفلترة حسب الاسم (case-insensitive)
   const filteredBrands = useMemo(
     () =>
       brands.filter((brand) =>

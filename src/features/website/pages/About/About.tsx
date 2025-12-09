@@ -10,9 +10,9 @@ import {
 
 export default function AboutPage() {
   const { t, i18n } = useTranslation();
-  const lang = i18n.language; // 'ar' أو 'en'
-
+  const lang = i18n.language;
   const websiteName = "Modified Car Lights";
+
   const pageTitle =
     lang === "ar"
       ? "عن الشركة | فوانيس سيارات معدلة"
@@ -27,22 +27,22 @@ export default function AboutPage() {
 
   const features = [
     {
-      icon: <FaRocket className="text-6xl mb-4" />,
+      icon: <FaRocket className="text-6xl mb-4 text-red-600" />,
       title: t("about.features.items.speed.title"),
       description: t("about.features.items.speed.desc"),
     },
     {
-      icon: <FaLightbulb className="text-6xl mb-4" />,
+      icon: <FaLightbulb className="text-6xl mb-4 text-red-600" />,
       title: t("about.features.items.innovation.title"),
       description: t("about.features.items.innovation.desc"),
     },
     {
-      icon: <FaUsers className="text-6xl mb-4" />,
+      icon: <FaUsers className="text-6xl mb-4 text-red-600" />,
       title: t("about.features.items.team.title"),
       description: t("about.features.items.team.desc"),
     },
     {
-      icon: <FaHeart className="text-6xl mb-4" />,
+      icon: <FaHeart className="text-6xl mb-4 text-red-600" />,
       title: t("about.features.items.support.title"),
       description: t("about.features.items.support.desc"),
     },
@@ -89,72 +89,71 @@ export default function AboutPage() {
       </Helmet>
 
       <div className="min-h-screen py-30 px-5 md:px-0 text-text container mx-auto">
-        {/* Header Section */}
-        <header className="text-center  ">
-          <h1 className="text-6xl font-bold mb-5 text-red-700 drop-shadow-[0_0_20px_rgba(255,87,34,0.3)]">
+        <header className="text-center">
+          <h1 className="text-6xl font-bold mb-5 text-red-600 drop-shadow-[0_0_20px_rgba(255,87,34,0.15)]">
             {t("about.header.title")}
           </h1>
-          <p className="text-2xl opacity-90">{t("about.header.subtitle")}</p>
+          <p className="text-2xl opacity-90 text-text">
+            {t("about.header.subtitle")}
+          </p>
         </header>
 
-        <div className=" py-16">
-          {/* About Section */}
-          <section className="p-12 mb-8 rounded-2xl bg-secondary border-r-4 border-red-700 transition-all duration-300 hover:-translate-x-2 hover:shadow-xl hover:shadow-red-500/20">
-            <h2 className="text-4xl font-bold mb-6 pb-4 text-red-700 border-b-2 border-red-700/30">
+        <div className="py-16">
+          <section className="p-12 mb-8 rounded-2xl bg-secondary border-r-4 border-gray-300 transition-all duration-300 hover:-translate-x-2 hover:shadow-xl hover:shadow-gray-400/10">
+            <h2 className="text-4xl font-bold mb-6 pb-4 text-text border-b-2 border-gray-300/70">
               {t("about.story.title")}
             </h2>
-            <p className="text-xl leading-relaxed mb-5">
+            <p className="text-lg leading-relaxed mb-5 text-text">
               {t("about.story.text1")}
             </p>
-            <p className="text-xl leading-relaxed">{t("about.story.text2")}</p>
+            <p className="text-lg leading-relaxed text-text">
+              {t("about.story.text2")}
+            </p>
           </section>
 
-          {/* Features Grid */}
           <section className="mb-16">
-            <h2 className="text-4xl font-bold text-center mb-12 text-red-700">
+            <h2 className="text-4xl font-bold text-center mb-12 text-text">
               {t("about.features.title")}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {features.map((feature, index) => (
                 <div
                   key={index}
-                  className="p-8 rounded-xl text-center transition-all duration-300 border-2 bg-primary border-secondary hover:border-red-700 hover:-translate-y-2 hover:shadow-xl hover:shadow-red-500/20 group"
+                  className="p-8 rounded-xl text-center transition-all duration-300 border-2 bg-primary border-gray-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-gray-300/20 group"
                 >
-                  <div className="text-red-700 group-hover:scale-110 transition-transform duration-300">
+                  <div className="group-hover:scale-110 transition-transform duration-300">
                     {feature.icon}
                   </div>
-                  <h3 className="text-2xl font-bold mb-3 text-red-700">
+                  <h3 className="text-2xl font-bold mb-3 text-text">
                     {feature.title}
                   </h3>
-                  <p className="opacity-85">{feature.description}</p>
+                  <p className="opacity-85 text-text">{feature.description}</p>
                 </div>
               ))}
             </div>
           </section>
 
-          {/* Stats Section */}
           <section className="p-12 rounded-2xl mb-16 bg-secondary">
-            <h2 className="text-4xl font-bold text-center mb-12 text-red-700">
+            <h2 className="text-4xl font-bold text-center mb-12 text-text">
               {t("about.stats.title")}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {stats.map((stat, index) => (
                 <div
                   key={index}
-                  className="text-center p-8 rounded-xl border-2 bg-primary border-red-700 hover:scale-105 transition-transform duration-300"
+                  className="text-center p-8 rounded-xl border-2 bg-primary border-gray-300 hover:scale-105 transition-transform duration-300"
                 >
-                  <span className="block text-5xl font-bold mb-3 text-red-700">
+                  <span className="block text-5xl font-bold mb-3 text-text">
                     {stat.number}
                   </span>
-                  <span className="text-xl">{stat.label}</span>
+                  <span className="text-xl text-text">{stat.label}</span>
                 </div>
               ))}
             </div>
           </section>
 
-          {/* Values Section */}
-          <section className="p-12 rounded-2xl bg-secondary border-r-4 border-red-700">
-            <h2 className="text-4xl font-bold mb-8 pb-4 text-red-700 border-b-2 border-red-700/30">
+          <section className="p-12 rounded-2xl bg-secondary border-r-4 border-gray-300">
+            <h2 className="text-4xl font-bold mb-8 pb-4 text-text border-b-2 border-gray-300/70">
               {t("about.values.title")}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -163,8 +162,8 @@ export default function AboutPage() {
                   key={index}
                   className="flex items-start gap-4 hover:translate-x-2 transition-transform duration-300"
                 >
-                  <FaCheckCircle className="text-3xl shrink-0 mt-1 text-red-700" />
-                  <p className="text-xl">{value}</p>
+                  <FaCheckCircle className="text-3xl shrink-0 mt-1 text-red-600" />
+                  <p className="text-xl text-text">{value}</p>
                 </div>
               ))}
             </div>
