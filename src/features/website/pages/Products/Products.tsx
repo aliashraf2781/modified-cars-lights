@@ -10,7 +10,7 @@ export default function Products() {
   const { topics, loading } = useTopics({ carCategory: categoryId });
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
-
+console.log(topics);
   const pageTitle =
     lang === "ar"
       ? `المنتجات | فوانيس سيارات معدلة `
@@ -67,7 +67,7 @@ export default function Products() {
         </script>
       </Helmet>
 
-      <div className="flex flex-col gap-6 container mx-auto mt-25 px-3 md:px-0 min-h-[calc(100vh-12rem)]">
+      <div className="flex flex-col gap-6 container mx-auto mt-25 px-3 md:px-0 min-h-screen">
         <div className="text-center">
           <h1 className="text-3xl md:text-4xl font-bold text-text mb-3">
             {t("products.title")}

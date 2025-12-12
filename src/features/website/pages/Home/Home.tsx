@@ -4,10 +4,12 @@ import HeroSection from "../../components/common/HeroSection/HeroSection";
 import BrandingSection from "../../components/page-components/Home/BrandingSection/BrandingSection";
 import PromotionBannerSection from "../../components/page-components/Home/PromotionBannerSection/PromotionBannerSection";
 import ShoppingSection from "../../components/page-components/Home/ShoppingSection/ShoppingSection";
-
+import RecentProductsSection from "../../components/page-components/Home/RecentProductsSection/RecentProductsSection.tsx";
 export default function Home() {
-  const { i18n } = useTranslation();
+  const { i18n  } = useTranslation();
+  
   const lang = i18n.language; // 'ar' أو 'en'
+
 
   const websiteName = "Modified Car Lights";
 
@@ -64,11 +66,12 @@ export default function Home() {
         </script>
       </Helmet>
 
-      <div className="flex flex-col gap-8 md:gap-15">
+      <div className="flex flex-col gap-8 md:gap-15 ">
         <HeroSection />
         <BrandingSection />
         <PromotionBannerSection />
         <ShoppingSection />
+        <RecentProductsSection />
       </div>
     </>
   );
