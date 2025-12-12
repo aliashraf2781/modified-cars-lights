@@ -68,10 +68,10 @@ export function useTopics({
 
         const selectQuery =
             lang === "en"
-                ? `id, name:name_en, description:des_en, content:content_en, video:video_url, images,
+                ? `id, name:name_en, description:des_en, content:content_en, created_at, video:video_url, images,
            lights_category:topic_type(id, name:name_en),
            car_category:sub_category(id, name:name_en, category_id)`
-                : `id, name:name_ar, description:des_ar, content:content_ar, video:video_url, images,
+                : `id, name:name_ar, description:des_ar, content:content_ar, created_at, video:video_url, images,
            lights_category:topic_type(id, name:name_ar),
            car_category:sub_category(id, name:name_ar, category_id)`;
 
