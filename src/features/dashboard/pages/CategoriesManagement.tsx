@@ -225,7 +225,7 @@ export default function CategoriesManagement() {
                         <FaFolder className="w-12 h-12 text-gray-500" />
                       )}
                     </div>
-                    <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="flex gap-2  transition-opacity">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
@@ -307,7 +307,7 @@ export default function CategoriesManagement() {
                       <span className="font-medium text-gray-200">
                         {sub.name}
                       </span>
-                      <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="flex gap-2  transition-opacity">
                         <button
                           onClick={() => openModal("subcategory", sub)}
                           className="text-blue-400 hover:text-blue-300 p-1"

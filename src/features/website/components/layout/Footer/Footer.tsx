@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 
 export default function Footer() {
   const { t, i18n } = useTranslation();
+  const lang = i18n.language;
   const dir = i18n.dir();
   const currentYear = new Date().getFullYear();
 
@@ -43,38 +44,45 @@ export default function Footer() {
       <div className="container mx-auto px-6 md:px-0 py-9 flex flex-col gap-12">
         <div className="grid grid-cols-1 gap-10">
           {/* Logo & Info */}
-          <div className="mx-auto text-center ">
-            <a href="/" className="inline-block mb-4">
-              <h2 className="text-2xl font-bold bg-linear-to-r from-red-800 via-red-700 to-red-500 bg-clip-text text-transparent">
+          <div className="mx-auto text-center  flex flex-col gap-4">
+              <h2 className="text-2xl lg:text-4xl font-bold bg-linear-to-r from-red-800 via-red-700 to-red-500 bg-clip-text text-transparent">
                 Modified Car Lights
               </h2>
-            </a>
-
-            <p className="text-sm text-gray-400 mb-6">
-              {t("footer.description")}
-            </p>
 
             <div
               dir={dir}
-              className="text-sm flex flex-col lg:flex-row items-center justify-center gap-2"
+              className="text-sm flex flex-col  items-center justify-center gap-2"
             >
               <a
                 dir={dir}
                 href="tel:+201001744902"
-                className="flex  items-center gap-2 justify-center"
+                className="flex items-center gap-2 justify-center"
               >
-                <MdPhone className="text-red-600" />{" "}
-                <p dir="ltr" className="text-center">
-                  +2010 01744902
-                </p>
+                <div className="flex gap-3 items-center p-4 border border-gray-200/50 hover:border-red-600 hover:scale-105 transition duration-300 rounded">
+                  <MdPhone className="text-red-600 " />{" "}
+                  <p className="text-center text-sm font-bold">
+                    {lang == "ar" ? "اتصل بنا :" : "Call Us :"}
+                  </p>
+                  <p dir="ltr" className="text-center">
+                    +2010 01744902
+                  </p>{" "}
+                </div>
               </a>
+
               <a
                 href="https://maps.app.goo.gl/Fq6R137QX2gVbLyg7"
                 target="_blank"
-                className="flex items-center gap-2  justify-center"
+                className="flex items-center gap-2 justify-center"
               >
-                <MdLocationOn className="text-red-600" />{" "}
-                <p dir={dir}>{t("footer.address")}</p>
+                <div className="flex gap-3 items-center p-4 border border-gray-200/50 hover:border-red-600 hover:scale-105 transition duration-300 rounded">
+                  <MdLocationOn className="text-red-600" />{" "}
+                  <p className="text-center text-sm font-bold">
+                    {lang == "ar"
+                      ? "دوس هنا عشان توصل لينا :"
+                      : "Get Our Location :"}
+                  </p>
+                  <p dir={dir}>{t("footer.address")}</p>
+                </div>
               </a>
             </div>
           </div>
@@ -91,7 +99,7 @@ export default function Footer() {
           {/* to whatsapp */}
           <a
             href="https://wa.me/201001744902"
-            className="mt-8 inline-block rounded-full border border-red-600 px-12 py-3 text-sm font-medium text-text hover:scale-3d"
+            className="mt-8 inline-block rounded-full border border-red-600 hover:border-red-600 hover:scale-105 transition duration-300 px-12 py-3 text-sm font-medium text-text hover:scale-3d"
           >
             {t("footer.cta.button")}
           </a>

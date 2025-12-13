@@ -30,7 +30,7 @@ export default function ProductCard({ topic } : { topic: Topic }) {
   )}`;
 
   const openGallery = (e, index) => {
-    e.preventDefault(); // يمنع فتح لينك الواتساب
+    e.preventDefault(); 
     setStartIndex(index);
     setOpenModal(true);
   };
@@ -75,7 +75,7 @@ export default function ProductCard({ topic } : { topic: Topic }) {
         target="_blank"
         onClick={(e) => e.stopPropagation()}
         rel="noopener noreferrer"
-        className="border h-[400px] flex flex-col justify-between p-4 bg-secondary rounded-lg shadow hover:shadow-lg transition-shadow"
+        className="border h-fit flex flex-col justify-between p-4 bg-secondary rounded-lg shadow hover:shadow-lg transition-shadow"
       >
         <div className="flex flex-col gap-2">
           {/* فيديو بدون صور */}
@@ -85,7 +85,7 @@ export default function ProductCard({ topic } : { topic: Topic }) {
               title="YouTube video player"
               allowFullScreen
               loading="eager"
-              className="mb-2 w-full p-2 bg-red-600 text-white rounded"
+              className=" w-full h-[200px] rounded"
             />
           )}
 

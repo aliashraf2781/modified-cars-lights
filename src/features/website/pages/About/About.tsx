@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import {
   FaRocket,
   FaUsers,
-  FaLightbulb,
   FaHeart,
   FaCheckCircle,
 } from "react-icons/fa";
@@ -23,7 +22,7 @@ export default function AboutPage() {
       ? "تعرف على فوانيس سيارات معدلة، فريقنا، قيمنا، وخبرتنا في تصميم وتحديث المصابيح الأمامية والخلفية وإضاءات LED."
       : "Learn about Modified Car Lights, our team, values, and expertise in designing and upgrading car headlights, taillights, and LED lighting.";
 
-  const pageUrl = "https://modifiedcarlights.com/about";
+  const pageUrl = `https://modifiedcarlights.com/${lang}/about`;
 
   const features = [
     {
@@ -31,11 +30,7 @@ export default function AboutPage() {
       title: t("about.features.items.speed.title"),
       description: t("about.features.items.speed.desc"),
     },
-    {
-      icon: <FaLightbulb className="text-6xl mb-4 text-red-600" />,
-      title: t("about.features.items.innovation.title"),
-      description: t("about.features.items.innovation.desc"),
-    },
+
     {
       icon: <FaUsers className="text-6xl mb-4 text-red-600" />,
       title: t("about.features.items.team.title"),
@@ -48,12 +43,7 @@ export default function AboutPage() {
     },
   ];
 
-  const stats = [
-    { number: "500+", label: t("about.stats.items.clients") },
-    { number: "1000+", label: t("about.stats.items.projects") },
-    { number: "15+", label: t("about.stats.items.awards") },
-    { number: "24/7", label: t("about.stats.items.support") },
-  ];
+
 
   const values = t("about.values.items", { returnObjects: true }) as string[];
 
@@ -115,7 +105,7 @@ export default function AboutPage() {
             <h2 className="text-4xl font-bold text-center mb-12 text-text">
               {t("about.features.title")}
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {features.map((feature, index) => (
                 <div
                   key={index}
@@ -128,25 +118,6 @@ export default function AboutPage() {
                     {feature.title}
                   </h3>
                   <p className="opacity-85 text-text">{feature.description}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section className="p-12 rounded-2xl mb-16 bg-secondary">
-            <h2 className="text-4xl font-bold text-center mb-12 text-text">
-              {t("about.stats.title")}
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {stats.map((stat, index) => (
-                <div
-                  key={index}
-                  className="text-center p-8 rounded-xl border-2 bg-primary border-gray-300 hover:scale-105 transition-transform duration-300"
-                >
-                  <span className="block text-5xl font-bold mb-3 text-text">
-                    {stat.number}
-                  </span>
-                  <span className="text-xl text-text">{stat.label}</span>
                 </div>
               ))}
             </div>

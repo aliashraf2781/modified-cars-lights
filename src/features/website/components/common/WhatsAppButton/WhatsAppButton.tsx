@@ -3,7 +3,7 @@ import { FaWhatsapp } from "react-icons/fa";
 
 export default function WhatsAppButton() {
   const { t } = useTranslation();
-  const phoneNumber = "201069022024"; 
+  const phoneNumber = "201001744902"; 
   const message = t("common.whatsappMessage"); 
   const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
     message
@@ -19,7 +19,7 @@ export default function WhatsAppButton() {
     >
       <FaWhatsapp size={28} className="relative z-10" />
       {/* Glow effect */}
-      <span className="absolute inset-0 rounded-full bg-green-500/30 blur-xl opacity-0 group-hover:opacity-70 transition-opacity duration-500" />
+      <span className="absolute inset-0 rounded-full border border-green-500 animate-pulse bg-green-500 blur-2xl duration-500" />
     </a>
   );
 }
