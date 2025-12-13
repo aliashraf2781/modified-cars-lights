@@ -1,9 +1,16 @@
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 
 const NotFound = () => {
  
 
   return (
+    <>
+    {/* no follow no index */}
+    <Helmet>
+      <title>404 | Page Not Found</title>
+      <meta name="robots" content="noindex, nofollow" />
+    </Helmet>
     <div className="flex flex-col items-center justify-center min-h-screen bg-background text-text">
       <h1 className="text-6xl font-bold text-red-700 mb-4">404</h1>
       <h2 className="text-2xl font-semibold mb-6">Page Not Found</h2>
@@ -18,6 +25,7 @@ const NotFound = () => {
         Go Back Home
       </Link>
     </div>
+    </>
   );
 };
 

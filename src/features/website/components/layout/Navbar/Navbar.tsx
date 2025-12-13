@@ -18,14 +18,16 @@ export default function Navbar() {
     { name: t("navbar.contact"), href: `/${lang}/contact` },
   ];
 
-
   return (
     <>
       <nav className="fixed z-50 w-full backdrop-blur-md shadow-lg  ">
         <div className="container mx-auto px-3 md:px-0 py-2">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link to={`/${lang}`} className="relative h-[50px] w-[120px] transition-transform hover:scale-105">
+            <Link
+              to={`/${lang}`}
+              className="relative h-[50px] w-[120px] transition-transform hover:scale-105"
+            >
               <img src="/logo.png" alt="Logo" className="cursor-pointer" />
             </Link>
 
@@ -36,14 +38,16 @@ export default function Navbar() {
             <div className="hidden md:block">
               <LanguageSwitcher currentLocale={lang} />
             </div>
-
+            <div className="md:hidden flex items-center gap-2">
+              <LanguageSwitcher currentLocale={lang} />
+              <button
+                onClick={() => setIsDrawerOpen(true)}
+                className="md:hidden text-text text-4xl rounded-full hover:bg-white/10 transition-all"
+              >
+                <IoIosMenu />
+              </button>
+            </div>
             {/* Mobile Menu Icon */}
-            <button
-              onClick={() => setIsDrawerOpen(true)}
-              className="md:hidden text-text rounded-full hover:bg-white/10 transition-all"
-            >
-              <IoIosMenu size={28} />
-            </button>
           </div>
         </div>
       </nav>

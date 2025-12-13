@@ -14,8 +14,6 @@ export default function ShoppingSection() {
         titleEn={t("home.shopping.title")}
         highlightAr={t("home.shopping.highlight")}
         highlightEN={t("home.shopping.highlight")}
-        descriptionAr={t("home.shopping.description")}
-        descriptionEn={t("home.shopping.description")}
       />
       <BrandsGrid brands={categories} />
     </section>

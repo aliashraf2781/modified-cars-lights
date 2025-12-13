@@ -1,7 +1,6 @@
 import { IoClose } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
-import LanguageSwitcher from "../../common/LanguageSwitcher/LanguageSwitcher";
-import { useTranslation } from "react-i18next";
+
 
 interface NavLinkItem {
   name: string;
@@ -19,8 +18,6 @@ export default function MobileDrawer({
   onClose,
   navLinks,
 }: MobileDrawerProps) {
-  const { i18n } = useTranslation();
-  const language = i18n.language;
  
 
   return (
@@ -72,9 +69,7 @@ export default function MobileDrawer({
             </NavLink>
           ))}
 
-          <LanguageSwitcher
-            currentLocale={language}
-            />
+  
         </div>
       </div>
     </>

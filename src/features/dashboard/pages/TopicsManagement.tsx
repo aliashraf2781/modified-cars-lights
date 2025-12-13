@@ -315,7 +315,7 @@ export default function TopicsManagement() {
                         <FaLayerGroup className="w-12 h-12 text-gray-500" />
                       )}
                     </div>
-                    <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="flex gap-2  transition-opacity">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
@@ -431,7 +431,7 @@ export default function TopicsManagement() {
                           {topic.description || "No description"}
                         </p>
                       </div>
-                      <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="flex gap-2 transition-opacity">
                         <button
                           onClick={() => openModal("topic", topic)}
                           className="p-2 text-blue-400 hover:bg-blue-900/30 rounded-lg transition-colors"

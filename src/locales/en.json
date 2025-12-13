@@ -16,7 +16,7 @@
     "logo": "Logo",
     "scrollDown": "Scroll Down",
     "viewAllProducts": "View All Products",
-    "whatsappMessage": "Hi! I'm interested in your modified car lights project."
+    "whatsappMessage": "Hi! I'm interested in your led projectors modifications."
   },
   "footer": {
     "description": "Upgrade your ride with premium lighting — performance and style in every beam.",
@@ -33,7 +33,7 @@
       "faqs": "FAQs"
     },
     "cta": {
-      "title": "Ready to Upgrade Your Car's Lighting?",
+      "title": "Ready to drive safely at night?",
       "description": "Get in touch with our team to discuss your specific needs and preferences. We're here to help you create the perfect lighting solution for your vehicle.",
       "button": "Get Contact with Us"
     },
@@ -57,7 +57,7 @@
     "story": {
       "title": "Our Story",
       "text1": "We specialize in upgrading and customizing car headlights and taillights with high-quality lighting solutions. Our journey began with a simple goal: to help every car owner enhance their vehicle’s lighting performance and appearance with professional, reliable, and stylish modifications.",
-      "text2": "Over the years, we’ve worked on hundreds of vehicles across different brands and models, gaining deep expertise in Bi-LED projectors, DRLs, Angel Eyes, RGB systems, laser modules, thermal headlight opening and sealing, restoring clarity, and vapor-proof insulation. Every job we complete follows precise techniques to deliver the best results possible."
+      "text2": "Over the years, we’ve worked on hundreds of vehicles across different brands and models, gaining deep expertise in Led Laser Projectors,. Every job we complete follows precise techniques to deliver the best results possible."
     },
     "features": {
       "title": "Why Choose Us",
@@ -65,10 +65,6 @@
         "speed": {
           "title": "Fast Execution",
           "desc": "Professional work delivered quickly without affecting light quality or headlight integrity."
-        },
-        "innovation": {
-          "title": "Custom Lighting Ideas",
-          "desc": "Unique designs including Angel Eyes, DRL lines, RGB systems, projectors, and custom effects based on your vision."
         },
         "team": {
           "title": "Skilled Technicians",
@@ -80,19 +76,11 @@
         }
       }
     },
-    "stats": {
-      "title": "Our Numbers Speak",
-      "items": {
-        "clients": "Satisfied Customers",
-        "projects": "Lights Modified",
-        "awards": "Years of Experience",
-        "support": "After-Service Support"
-      }
-    },
+
     "values": {
       "title": "Our Values",
       "items": [
-        "Using premium-grade LEDs, projectors, and lighting components for powerful and reliable results.",
+        "Using premium-grade Led Laser Projectors for powerful and reliable results.",
         "Performing every step with high accuracy — from opening headlights to sealing and adjustment.",
         "Prioritizing road safety by ensuring focused beams without dazzling other drivers.",
         "Providing guaranteed work against moisture, low brightness, or installation defects."
@@ -106,7 +94,7 @@
 
   "contact": {
     "title": "Contact Us",
-    "subtitle": "First website in Egypt specialized in car lighting modifications ( front and rear lights, headlights, and interior and exterior car lighting and others )",
+    "subtitle": "First website in Egypt specialized in car lighting modifications",
     "whatsapp": "Contact us for any questions via whatsapp",
     "youtube": "Follow us for all new updates via our youtube channel",
     "tiktok": "Follow us on tiktok"
@@ -121,15 +109,12 @@
   "home": {
     "promotionBanner": "Upgrade Your Ride with Our Exclusive Car Light Mods !",
     "shopping": {
-      "title": "Shop from the Best",
-      "highlight": "Brands",
-      "description": "Explore a wide range of cars from the best global brands.",
-      "showAll": "Show All",
-      "showLess": "Show Less"
+      "title": "Choose Your Car",
+      "highlight": "Brand"
     },
     "branding": {
-      "title": "Mod Your Ride – Unleash Your Car’s True Potential!",
-      "description": "We specialize in professional car light modification and upgrades. From standard headlights to powerful LED and Xenon setups, we enhance brightness, visibility, and overall vehicle style. Our mission is to boost night driving safety while giving your car a modern, standout look. Whether you want a sporty vibe or a premium lighting upgrade, we provide high-quality results with original materials."
+      "title": "Tune up your headlights - We will light up your way",
+      "description": "Specialists in modifying car headlights and installing lenses with high professionalism, boasting over 15 years of experience in the field. We convert standard headlights to more economical and powerful laser projector projector lights. We focus on significantly improving nighttime visibility and enhancing driving safety, while adding an aesthetic touch that gives your car a stylish and distinctive look. We're here to deliver the best lighting performance with the highest quality materials."
     },
     "search": {
       "placeholder": "Search by brand name",

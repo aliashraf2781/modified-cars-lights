@@ -17,7 +17,7 @@ export default function CarCategoryCard({ brand }: BrandCardProps) {
         {/* Main Circle */}
         <div className="relative w-full h-full rounded-full overflow-hidden shadow-lg transition-all duration-500 border-2 border-secondary group-hover:border-red-700 group-hover:shadow-red-700/50 group-hover:scale-110 bg-linear-to-br from-white to-gray-100">
           <img
-            src={`https://www.modifiedcarlights.com/uploads/${brand?.logo}`}
+            src={brand?.logo}
             alt={brand.name}
             className="object-contain transition-all duration-500 group-hover:scale-110 group-hover:brightness-110"
           />
