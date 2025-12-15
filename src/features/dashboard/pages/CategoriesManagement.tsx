@@ -59,6 +59,10 @@ export default function CategoriesManagement() {
     null
   );
 
+  // Submission and Upload States
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isUploadingCategoryLogo, setIsUploadingCategoryLogo] = useState(false);
+
   // Forms
   const {
     register: registerCat,
@@ -118,6 +122,7 @@ export default function CategoriesManagement() {
   };
 
   const onCategorySubmit: SubmitHandler<CategoryFormInputs> = async (data) => {
+    setIsSubmitting(true);
     try {
       if (editingItem) {
         await updateCategory({ id: editingItem.id.toString(), ...data });
@@ -128,6 +133,8 @@ export default function CategoriesManagement() {
     } catch (e) {
       console.error(e);
       alert("Error saving category");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -135,6 +142,7 @@ export default function CategoriesManagement() {
     data
   ) => {
     if (!selectedCategoryId) return;
+    setIsSubmitting(true);
     try {
       if (editingItem) {
         await updateSubCategory({ id: editingItem.id.toString(), ...data });
@@ -145,6 +153,8 @@ export default function CategoriesManagement() {
     } catch (e) {
       console.error(e);
       alert("Error saving subcategory");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -415,6 +425,7 @@ export default function CategoriesManagement() {
                   value={categoryLogo}
                   onChange={(val) => setValueCat("logo", val as string)}
                   placeholder="Upload category logo"
+                  onUploadingChange={setIsUploadingCategoryLogo}
                 />
               </div>
 
@@ -428,9 +439,10 @@ export default function CategoriesManagement() {
                 </button>
                 <button
                   type="submit"
-                  className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
+                  disabled={isSubmitting || isUploadingCategoryLogo}
+                  className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Save Category
+                  {isSubmitting ? "Saving..." : "Save Category"}
                 </button>
               </div>
             </form>
@@ -484,9 +496,10 @@ export default function CategoriesManagement() {
                 </button>
                 <button
                   type="submit"
-                  className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
+                  disabled={isSubmitting}
+                  className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Save SubCategory
+                  {isSubmitting ? "Saving..." : "Save SubCategory"}
                 </button>
               </div>
             </form>

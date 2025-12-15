@@ -6,12 +6,13 @@ interface ImageUploadProps {
     onChange: (value: string | string[]) => void;
     multiple?: boolean;
     placeholder?: string;
+    onUploadingChange?: (isUploading: boolean) => void;
 }
 
 const CLOUDINARY_UPLOAD_PRESET = "ml_default";
 const CLOUDINARY_CLOUD_NAME = "deougppf2";
 
-export default function ImageUpload({ value, onChange, multiple = false, placeholder = "Upload Image" }: ImageUploadProps) {
+export default function ImageUpload({ value, onChange, multiple = false, placeholder = "Upload Image", onUploadingChange }: ImageUploadProps) {
     const [uploading, setUploading] = useState(false);
     const [urlInput, setUrlInput] = useState("");
     const [showUrlInput, setShowUrlInput] = useState(false);
@@ -23,6 +24,7 @@ export default function ImageUpload({ value, onChange, multiple = false, placeho
         if (!files || files.length === 0) return;
 
         setUploading(true);
+        onUploadingChange?.(true);
         const newUrls: string[] = [];
 
         try {
@@ -56,6 +58,7 @@ export default function ImageUpload({ value, onChange, multiple = false, placeho
             alert("Failed to upload image. Please check your Cloudinary configuration.");
         } finally {
             setUploading(false);
+            onUploadingChange?.(false);
         }
     };
 
