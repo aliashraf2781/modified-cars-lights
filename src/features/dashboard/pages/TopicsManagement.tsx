@@ -75,6 +75,11 @@ export default function TopicsManagement() {
     null
   );
 
+  // Submission and Upload States
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isUploadingTypeLogo, setIsUploadingTypeLogo] = useState(false);
+  const [isUploadingTopicImages, setIsUploadingTopicImages] = useState(false);
+
   // Forms
   const {
     register: registerType,
@@ -198,6 +203,7 @@ export default function TopicsManagement() {
   };
 
   const onTypeSubmit: SubmitHandler<TopicTypeFormInputs> = async (data) => {
+    setIsSubmitting(true);
     try {
       if (editingItem) {
         await updateTopicType({ id: editingItem.id, ...data });
@@ -208,10 +214,13 @@ export default function TopicsManagement() {
     } catch (e) {
       console.error(e);
       alert("Error saving topic type");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   const onTopicSubmit: SubmitHandler<TopicFormInputs> = async (data) => {
+    setIsSubmitting(true);
     try {
       const payload = {
         ...data,
@@ -228,6 +237,8 @@ export default function TopicsManagement() {
     } catch (e) {
       console.error(e);
       alert("Error saving topic");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -295,11 +306,10 @@ export default function TopicsManagement() {
                       : type.id.toString()
                   )
                 }
-                className={`relative group bg-linear-to-br from-neutral-800 to-black rounded-xl p-6 border transition-all cursor-pointer hover:-translate-y-1 hover:shadow-xl overflow-hidden ${
-                  selectedTypeId === type.id.toString()
+                className={`relative group bg-linear-to-br from-neutral-800 to-black rounded-xl p-6 border transition-all cursor-pointer hover:-translate-y-1 hover:shadow-xl overflow-hidden ${selectedTypeId === type.id.toString()
                     ? "border-red-500 shadow-red-900/20"
                     : "border-neutral-800 hover:border-red-400"
-                }`}
+                  }`}
               >
                 <div className="absolute inset-0 bg-linear-to-br from-gray-800/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="relative z-10">
@@ -517,6 +527,7 @@ export default function TopicsManagement() {
                   value={typeLogo}
                   onChange={(val) => setValueType("logo", val as string)}
                   placeholder="Upload type logo"
+                  onUploadingChange={setIsUploadingTypeLogo}
                 />
               </div>
 
@@ -530,9 +541,10 @@ export default function TopicsManagement() {
                 </button>
                 <button
                   type="submit"
-                  className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
+                  disabled={isSubmitting || isUploadingTypeLogo}
+                  className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Save Topic Type
+                  {isSubmitting ? "Saving..." : "Save Topic Type"}
                 </button>
               </div>
             </form>
@@ -689,6 +701,7 @@ export default function TopicsManagement() {
                   onChange={(val) => setValueTopic("images", val as string[])}
                   multiple={true}
                   placeholder="Upload multiple images for the gallery"
+                  onUploadingChange={setIsUploadingTopicImages}
                 />
               </div>
 
@@ -702,9 +715,10 @@ export default function TopicsManagement() {
                 </button>
                 <button
                   type="submit"
-                  className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
+                  disabled={isSubmitting || isUploadingTopicImages}
+                  className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Save Topic
+                  {isSubmitting ? "Saving..." : "Save Topic"}
                 </button>
               </div>
             </form>
